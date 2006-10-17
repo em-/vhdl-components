@@ -23,7 +23,7 @@ begin
 
 test: process
     variable testA, testB, testO: std_logic;
-    file test_file: text is in "tb_or2.test";
+    file test_file: text is in "or2/tb_or2.test";
 
     variable l: line;
     variable t: time;

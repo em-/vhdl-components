@@ -1,7 +1,7 @@
 GHDL=ghdl
 GHDLFLAGS= --ieee=synopsys
 
-SOURCES=tb_or2.vhdl or2.vhdl
+SOURCES=or2/tb_or2.vhdl or2/or2.vhdl
 
 
 # Default target
@@ -18,9 +18,9 @@ run: tb_or2
 
 
 # Targets to analyze files
-tb_or2.o: tb_or2.vhdl
+tb_or2.o: or2/tb_or2.vhdl
 	$(GHDL) -a $(GHDLFLAGS) $<
-or2.o: or2.vhdl
+or2.o: or2/or2.vhdl
 	$(GHDL) -a $(GHDLFLAGS) $<
 
 
