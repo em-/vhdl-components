@@ -3,7 +3,8 @@ GHDLFLAGS= --ieee=synopsys
 
 SOURCES=or2/tb_or2.vhdl or2/or2.vhdl \
         or3/tb_or3.vhdl or3/or3.vhdl \
-        and2/tb_and2.vhdl and2/and2.vhdl
+        and2/tb_and2.vhdl and2/and2.vhdl \
+        ha/tb_ha.vhdl ha/ha.vhdl
 
 
 # Default target
@@ -19,12 +20,16 @@ tb_or3:  tb_or3.o or3.o
 tb_and2:  tb_and2.o and2.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
+tb_ha:  tb_ha.o ha.o
+	$(GHDL) -e $(GHDLFLAGS) $@
+
 
 # Run target
-run: tb_or2 tb_or3 tb_and2
+run: tb_or2 tb_or3 tb_and2 tb_ha
 	$(GHDL) -r tb_or2 $(GHDLRUNFLAGS)
 	$(GHDL) -r tb_or3 $(GHDLRUNFLAGS)
 	$(GHDL) -r tb_and2 $(GHDLRUNFLAGS)
+	$(GHDL) -r tb_ha $(GHDLRUNFLAGS)
 
 
 # Targets to analyze files
@@ -43,6 +48,11 @@ tb_and2.o: and2/tb_and2.vhdl
 and2.o: and2/and2.vhdl
 	$(GHDL) -a $(GHDLFLAGS) $<
 
+tb_ha.o: ha/tb_ha.vhdl
+	$(GHDL) -a $(GHDLFLAGS) $<
+ha.o: ha/ha.vhdl
+	$(GHDL) -a $(GHDLFLAGS) $<
+
 
 # Check target
 check:
@@ -50,5 +60,5 @@ check:
 
 clean:
 	-rm -rf *.o
-	-rm -rf tb_or2 tb_or3 tb_and2
+	-rm -rf tb_or2 tb_or3 tb_and2 tb_ha
 	-rm -rf work-obj93.cf
