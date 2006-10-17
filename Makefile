@@ -36,7 +36,7 @@ tb_mux21:  tb_mux21.o mux21.o
 tb_mux21_1bit:  tb_mux21_1bit.o mux21_1bit.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
-tb_rca:  tb_rca.o rca.o
+tb_rca:  tb_rca.o rca.o fa.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
 
