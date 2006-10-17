@@ -4,7 +4,8 @@ GHDLFLAGS= --ieee=synopsys
 SOURCES=or2/tb_or2.vhdl or2/or2.vhdl \
         or3/tb_or3.vhdl or3/or3.vhdl \
         and2/tb_and2.vhdl and2/and2.vhdl \
-        ha/tb_ha.vhdl ha/ha.vhdl
+        ha/tb_ha.vhdl ha/ha.vhdl \
+        fa/tb_fa.vhdl fa/fa.vhdl
 
 
 # Default target
@@ -23,13 +24,17 @@ tb_and2:  tb_and2.o and2.o
 tb_ha:  tb_ha.o ha.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
+tb_fa:  tb_fa.o fa.o
+	$(GHDL) -e $(GHDLFLAGS) $@
+
 
 # Run target
-run: tb_or2 tb_or3 tb_and2 tb_ha
+run: tb_or2 tb_or3 tb_and2 tb_ha tb_fa
 	$(GHDL) -r tb_or2 $(GHDLRUNFLAGS)
 	$(GHDL) -r tb_or3 $(GHDLRUNFLAGS)
 	$(GHDL) -r tb_and2 $(GHDLRUNFLAGS)
 	$(GHDL) -r tb_ha $(GHDLRUNFLAGS)
+	$(GHDL) -r tb_fa $(GHDLRUNFLAGS)
 
 
 # Targets to analyze files
@@ -53,6 +58,11 @@ tb_ha.o: ha/tb_ha.vhdl
 ha.o: ha/ha.vhdl
 	$(GHDL) -a $(GHDLFLAGS) $<
 
+tb_fa.o: fa/tb_fa.vhdl
+	$(GHDL) -a $(GHDLFLAGS) $<
+fa.o: fa/fa.vhdl
+	$(GHDL) -a $(GHDLFLAGS) $<
+
 
 # Check target
 check:
@@ -60,5 +70,5 @@ check:
 
 clean:
 	-rm -rf *.o
-	-rm -rf tb_or2 tb_or3 tb_and2 tb_ha
+	-rm -rf tb_or2 tb_or3 tb_and2 tb_ha tb_fa
 	-rm -rf work-obj93.cf
