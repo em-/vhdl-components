@@ -19,37 +19,37 @@ SOURCES=or2/tb_or2.vhdl or2/or2.vhdl \
 all: run
 
 # Elaboration target
-tb_or2:  tb_or2.o or2.o
+tb_or2: or2.o tb_or2.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
-tb_or3:  tb_or3.o or3.o
+tb_or3: or3.o tb_or3.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
-tb_and2:  tb_and2.o and2.o
+tb_and2: and2.o tb_and2.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
-tb_ha:  tb_ha.o ha.o
+tb_ha: ha.o tb_ha.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
-tb_fa:  tb_fa.o fa.o
+tb_fa: fa.o tb_fa.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
-tb_mux21:  tb_mux21.o mux21.o
+tb_mux21: mux21.o tb_mux21.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
-tb_mux21_1bit:  tb_mux21_1bit.o mux21_1bit.o
+tb_mux21_1bit: mux21_1bit.o tb_mux21_1bit.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
-tb_rca:  tb_rca.o rca.o fa.o
+tb_rca: rca.o fa.o tb_rca.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
-tb_fd:  tb_fd.o fd.o fa.o
+tb_fd: fd.o tb_fd.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
-tb_ft:  tb_ft.o ft.o fa.o
+tb_ft: ft.o tb_ft.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
-tb_reg: reg.o tb_reg.o
+tb_reg: fd.o reg.o tb_reg.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
 
