@@ -60,10 +60,10 @@ begin
             wait for t - now;
         end if;
         
-        assert O = testO report "error";
+        assert O = testO report "Mismatch on output O";
     end loop;
 
-    assert false report "test complete" severity note;
+    assert false report "Finished" severity note;
     wait;
 end process;
 

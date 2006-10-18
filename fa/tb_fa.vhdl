@@ -60,11 +60,11 @@ begin
             wait for t - now;
         end if;
         
-        assert S = testS report "error";
-        assert Co = testCo report "error";
+        assert S = testS report "Mismatch on output S";
+        assert Co = testCo report "Mismatch on output Co";
     end loop;
 
-    assert false report "test complete" severity note;
+    assert false report "Finished" severity note;
     wait;
 end process;
 

@@ -71,10 +71,10 @@ begin
         RST <= testRST;
         T <= testT;
 
-        assert Q = testQ report "error";
+        assert Q = testQ report "Mismatch on output Q";
     end loop;
 
-    assert false report "test complete" severity note;
+    assert false report "Finished" severity note;
     wait;
 end process;
 
