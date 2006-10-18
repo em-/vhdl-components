@@ -2,17 +2,17 @@ GHDL=ghdl
 GHDLFLAGS= --ieee=synopsys
 GHDLRUNFLAGS= --stop-time=15ns
 
-SOURCES=or2/tb_or2.vhdl or2/or2.vhdl \
-        or3/tb_or3.vhdl or3/or3.vhdl \
-        and2/tb_and2.vhdl and2/and2.vhdl \
-        ha/tb_ha.vhdl ha/ha.vhdl \
-        fa/tb_fa.vhdl fa/fa.vhdl \
-        mux21/tb_mux21.vhdl mux21/mux21.vhdl \
-        mux21/tb_mux21_1bit.vhdl mux21/mux21_1bit.vhdl \
-        rca/tb_rca.vhdl rca/rca.vhdl \
-        fd/tb_fd.vhdl fd/fd.vhdl \
-        ft/tb_ft.vhdl ft/ft.vhdl \
-        reg/tb_reg.vhdl reg/reg.vhdl
+SOURCES=or2/or2.vhdl or2/tb_or2.vhdl \
+        or3/or3.vhdl or3/tb_or3.vhdl \
+        and2/and2.vhdl and2/tb_and2.vhdl \
+        ha/ha.vhdl ha/tb_ha.vhdl \
+        fa/fa.vhdl fa/tb_fa.vhdl \
+        mux21/mux21.vhdl mux21/tb_mux21.vhdl \
+        mux21/mux21_1bit.vhdl mux21/tb_mux21_1bit.vhdl \
+        rca/rca.vhdl rca/tb_rca.vhdl \
+        fd/fd.vhdl fd/tb_fd.vhdl \
+        ft/ft.vhdl ft/tb_ft.vhdl \
+        reg/reg.vhdl reg/tb_reg.vhdl
 
 
 # Default target
