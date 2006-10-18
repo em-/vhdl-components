@@ -11,7 +11,8 @@ SOURCES=or2/tb_or2.vhdl or2/or2.vhdl \
         mux21/tb_mux21_1bit.vhdl mux21/mux21_1bit.vhdl \
         rca/tb_rca.vhdl rca/rca.vhdl \
         fd/tb_fd.vhdl fd/fd.vhdl \
-        ft/tb_ft.vhdl ft/ft.vhdl
+        ft/tb_ft.vhdl ft/ft.vhdl \
+        reg/tb_reg.vhdl reg/reg.vhdl
 
 
 # Default target
@@ -48,9 +49,12 @@ tb_fd:  tb_fd.o fd.o fa.o
 tb_ft:  tb_ft.o ft.o fa.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
+tb_reg: reg.o tb_reg.o
+	$(GHDL) -e $(GHDLFLAGS) $@
+
 
 # Run target
-run: tb_or2 tb_or3 tb_and2 tb_ha tb_fa tb_mux21 tb_mux21_1bit tb_rca tb_fd tb_ft
+run: tb_or2 tb_or3 tb_and2 tb_ha tb_fa tb_mux21 tb_mux21_1bit tb_rca tb_fd tb_ft tb_reg
 	$(GHDL) -r tb_or2 $(GHDLRUNFLAGS)
 	$(GHDL) -r tb_or3 $(GHDLRUNFLAGS)
 	$(GHDL) -r tb_and2 $(GHDLRUNFLAGS)
@@ -61,6 +65,7 @@ run: tb_or2 tb_or3 tb_and2 tb_ha tb_fa tb_mux21 tb_mux21_1bit tb_rca tb_fd tb_ft
 	$(GHDL) -r tb_rca $(GHDLRUNFLAGS)
 	$(GHDL) -r tb_fd $(GHDLRUNFLAGS)
 	$(GHDL) -r tb_ft $(GHDLRUNFLAGS)
+	$(GHDL) -r tb_reg $(GHDLRUNFLAGS)
 
 
 # Targets to analyze files
@@ -114,6 +119,11 @@ tb_ft.o: ft/tb_ft.vhdl
 ft.o: ft/ft.vhdl
 	$(GHDL) -a $(GHDLFLAGS) $<
 
+tb_reg.o: reg/tb_reg.vhdl
+	$(GHDL) -a $(GHDLFLAGS) $<
+reg.o: reg/reg.vhdl
+	$(GHDL) -a $(GHDLFLAGS) $<
+
 
 # Check target
 check:
@@ -121,5 +131,5 @@ check:
 
 clean:
 	-rm -rf *.o
-	-rm -rf tb_or2 tb_or3 tb_and2 tb_ha tb_fa tb_mux21 tb_mux21_1bit tb_rca tb_fd tb_ft
+	-rm -rf tb_or2 tb_or3 tb_and2 tb_ha tb_fa tb_mux21 tb_mux21_1bit tb_rca tb_fd tb_ft tb_reg
 	-rm -rf work-obj93.cf
