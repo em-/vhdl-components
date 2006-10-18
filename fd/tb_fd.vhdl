@@ -31,7 +31,6 @@ begin
 end process;
 
 count: process(CLK)
-    variable l: line;
 begin
     if rising_edge(CLK) then
         counter <= counter + 1;
@@ -42,7 +41,7 @@ test: process
     variable testRST, testEN, testD, testQ: std_logic;
     file test_file: text is in "fd/tb_fd.test";
 
-    variable l, l_out: line;
+    variable l: line;
     variable t: integer;
     variable good: boolean;
     variable space: character;
