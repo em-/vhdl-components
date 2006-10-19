@@ -160,6 +160,4 @@ check:
 	$(GHDL) -s $(GHDLFLAGS) $(SOURCES)
 
 clean:
-	-rm -rf *.o
-	-rm -rf tb_or2 tb_or3 tb_and2 tb_ha tb_fa tb_mux21 tb_mux21_1bit tb_comparator tb_rca tb_fd tb_ft tb_reg tb_counter tb_accumulator
-	-rm -rf work-obj93.cf
+	-ghdl --remove
