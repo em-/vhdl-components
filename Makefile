@@ -1,6 +1,6 @@
 GHDL=ghdl
 GHDLFLAGS= --ieee=synopsys
-GHDLRUNFLAGS= --stop-time=15ns
+GHDLRUNFLAGS= --stop-time=20ns
 
 SOURCES=or2/or2.vhdl or2/tb_or2.vhdl \
         or3/or3.vhdl or3/tb_or3.vhdl \
@@ -12,7 +12,8 @@ SOURCES=or2/or2.vhdl or2/tb_or2.vhdl \
         rca/rca.vhdl rca/tb_rca.vhdl \
         fd/fd.vhdl fd/tb_fd.vhdl \
         ft/ft.vhdl ft/tb_ft.vhdl \
-        reg/reg.vhdl reg/tb_reg.vhdl
+        reg/reg.vhdl reg/tb_reg.vhdl \
+        counter/counter.vhdl counter/tb_counter.vhdl
 
 
 # Default target
@@ -52,9 +53,12 @@ tb_ft: ft.o tb_ft.o
 tb_reg: fd.o reg.o tb_reg.o
 	$(GHDL) -e $(GHDLFLAGS) $@
 
+tb_counter: ha.o fd.o counter.o tb_counter.o
+	$(GHDL) -e $(GHDLFLAGS) $@
+
 
 # Run target
-run: tb_or2 tb_or3 tb_and2 tb_ha tb_fa tb_mux21 tb_mux21_1bit tb_rca tb_fd tb_ft tb_reg
+run: tb_or2 tb_or3 tb_and2 tb_ha tb_fa tb_mux21 tb_mux21_1bit tb_rca tb_fd tb_ft tb_reg tb_counter
 	$(GHDL) -r tb_or2 $(GHDLRUNFLAGS)
 	$(GHDL) -r tb_or3 $(GHDLRUNFLAGS)
 	$(GHDL) -r tb_and2 $(GHDLRUNFLAGS)
@@ -66,6 +70,7 @@ run: tb_or2 tb_or3 tb_and2 tb_ha tb_fa tb_mux21 tb_mux21_1bit tb_rca tb_fd tb_ft
 	$(GHDL) -r tb_fd $(GHDLRUNFLAGS)
 	$(GHDL) -r tb_ft $(GHDLRUNFLAGS)
 	$(GHDL) -r tb_reg $(GHDLRUNFLAGS)
+	$(GHDL) -r tb_counter $(GHDLRUNFLAGS)
 
 
 # Targets to analyze files
@@ -124,6 +129,11 @@ tb_reg.o: reg/tb_reg.vhdl
 reg.o: reg/reg.vhdl
 	$(GHDL) -a $(GHDLFLAGS) $<
 
+tb_counter.o: counter/tb_counter.vhdl
+	$(GHDL) -a $(GHDLFLAGS) $<
+counter.o: counter/counter.vhdl
+	$(GHDL) -a $(GHDLFLAGS) $<
+
 
 # Check target
 check:
@@ -131,5 +141,5 @@ check:
 
 clean:
 	-rm -rf *.o
-	-rm -rf tb_or2 tb_or3 tb_and2 tb_ha tb_fa tb_mux21 tb_mux21_1bit tb_rca tb_fd tb_ft tb_reg
+	-rm -rf tb_or2 tb_or3 tb_and2 tb_ha tb_fa tb_mux21 tb_mux21_1bit tb_rca tb_fd tb_ft tb_reg tb_counter
 	-rm -rf work-obj93.cf
