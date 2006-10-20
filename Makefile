@@ -21,10 +21,10 @@ TESTBENCHES=tb_or2 tb_or3 tb_and2 tb_ha tb_fa tb_rca \
             tb_mux21 tb_mux21_1bit tb_comparator \
             tb_fd tb_ft tb_reg tb_counter tb_accumulator
 
-
 # Default target
 all: run
 
+# Testbenches dependencies
 tb_or2: or2.o tb_or2.o
 tb_or3: or3.o tb_or3.o
 tb_and2: and2.o tb_and2.o
@@ -40,22 +40,23 @@ tb_reg: fd.o reg.o tb_reg.o
 tb_counter: ha.o fd.o counter.o tb_counter.o
 tb_accumulator: fa.o fd.o mux21.o rca.o reg.o accumulator.o tb_accumulator.o
 
+
 # Elaboration target
 $(TESTBENCHES):
 	$(GHDL) -e $(GHDLFLAGS) $@
-
-# Run target
-run: $(TESTBENCHES) 
-	for i in $^; do echo $$i; $(GHDL) -r $$i $(GHDLRUNFLAGS); done
-
 
 # Targets to analyze files
 %.o: */%.vhdl
 	$(GHDL) -a $(GHDLFLAGS) $<
 
-# Check target
+# Syntax check target
 check:
 	$(GHDL) -s $(GHDLFLAGS) $(SOURCES)
 
+# Run target
+run: $(TESTBENCHES) 
+	for i in $^; do echo $$i; $(GHDL) -r $$i $(GHDLRUNFLAGS); done
+
+# Clean target
 clean:
 	-ghdl --remove
