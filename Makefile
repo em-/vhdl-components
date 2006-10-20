@@ -25,49 +25,24 @@ TESTBENCHES=tb_or2 tb_or3 tb_and2 tb_ha tb_fa tb_rca \
 # Default target
 all: run
 
-# Elaboration target
 tb_or2: or2.o tb_or2.o
-	$(GHDL) -e $(GHDLFLAGS) $@
-
 tb_or3: or3.o tb_or3.o
-	$(GHDL) -e $(GHDLFLAGS) $@
-
 tb_and2: and2.o tb_and2.o
-	$(GHDL) -e $(GHDLFLAGS) $@
-
 tb_ha: ha.o tb_ha.o
-	$(GHDL) -e $(GHDLFLAGS) $@
-
 tb_fa: fa.o tb_fa.o
-	$(GHDL) -e $(GHDLFLAGS) $@
-
 tb_mux21: mux21.o tb_mux21.o
-	$(GHDL) -e $(GHDLFLAGS) $@
-
 tb_mux21_1bit: mux21_1bit.o tb_mux21_1bit.o
-	$(GHDL) -e $(GHDLFLAGS) $@
-
 tb_comparator: comparator.o fa.o tb_comparator.o
-	$(GHDL) -e $(GHDLFLAGS) $@
-
 tb_rca: rca.o fa.o tb_rca.o
-	$(GHDL) -e $(GHDLFLAGS) $@
-
 tb_fd: fd.o tb_fd.o
-	$(GHDL) -e $(GHDLFLAGS) $@
-
 tb_ft: ft.o tb_ft.o
-	$(GHDL) -e $(GHDLFLAGS) $@
-
 tb_reg: fd.o reg.o tb_reg.o
-	$(GHDL) -e $(GHDLFLAGS) $@
-
 tb_counter: ha.o fd.o counter.o tb_counter.o
-	$(GHDL) -e $(GHDLFLAGS) $@
-
 tb_accumulator: fa.o fd.o mux21.o rca.o reg.o accumulator.o tb_accumulator.o
-	$(GHDL) -e $(GHDLFLAGS) $@
 
+# Elaboration target
+$(TESTBENCHES):
+	$(GHDL) -e $(GHDLFLAGS) $@
 
 # Run target
 run: $(TESTBENCHES) 
