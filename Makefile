@@ -67,20 +67,7 @@ tb_accumulator: fa.o fd.o mux21.o rca.o reg.o accumulator.o tb_accumulator.o
 
 # Run target
 run: tb_or2 tb_or3 tb_and2 tb_ha tb_fa tb_mux21 tb_mux21_1bit tb_comparator tb_rca tb_fd tb_ft tb_reg tb_counter tb_accumulator
-	$(GHDL) -r tb_or2 $(GHDLRUNFLAGS)
-	$(GHDL) -r tb_or3 $(GHDLRUNFLAGS)
-	$(GHDL) -r tb_and2 $(GHDLRUNFLAGS)
-	$(GHDL) -r tb_ha $(GHDLRUNFLAGS)
-	$(GHDL) -r tb_fa $(GHDLRUNFLAGS)
-	$(GHDL) -r tb_mux21 $(GHDLRUNFLAGS)
-	$(GHDL) -r tb_mux21_1bit $(GHDLRUNFLAGS)
-	$(GHDL) -r tb_comparator $(GHDLRUNFLAGS)
-	$(GHDL) -r tb_rca $(GHDLRUNFLAGS)
-	$(GHDL) -r tb_fd $(GHDLRUNFLAGS)
-	$(GHDL) -r tb_ft $(GHDLRUNFLAGS)
-	$(GHDL) -r tb_reg $(GHDLRUNFLAGS)
-	$(GHDL) -r tb_counter $(GHDLRUNFLAGS)
-	$(GHDL) -r tb_accumulator $(GHDLRUNFLAGS)
+	for i in $^; do echo $$i; $(GHDL) -r $$i $(GHDLRUNFLAGS); done
 
 
 # Targets to analyze files
