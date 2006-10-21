@@ -17,14 +17,19 @@ tb_ha: ha.o tb_ha.o
 tb_fa: fa.o tb_fa.o
 tb_mux21: mux21.o tb_mux21.o
 tb_mux21_1bit: mux21_1bit.o tb_mux21_1bit.o
-tb_comparator: comparator.o fa.o tb_comparator.o
-tb_rca: rca.o fa.o tb_rca.o
+tb_comparator: comparator.o tb_comparator.o
+tb_rca: rca.o tb_rca.o
 tb_fd: fd.o tb_fd.o
 tb_ft: ft.o tb_ft.o
-tb_reg: fd.o reg.o tb_reg.o
-tb_counter: ha.o fd.o counter.o tb_counter.o
-tb_accumulator: fa.o fd.o mux21.o rca.o reg.o accumulator.o tb_accumulator.o
+tb_reg: reg.o tb_reg.o
+tb_counter: counter.o tb_counter.o
+tb_accumulator: accumulator.o tb_accumulator.o
 
+comparator.o: fa.o
+rca.o: fa.o
+reg.o: fd.o
+counter.o: ha.o fd.o
+accumulator.o: mux21.o rca.o reg.o
 
 # Elaboration target
 $(TESTBENCHES):
