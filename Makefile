@@ -2,21 +2,6 @@ GHDL=ghdl
 GHDLFLAGS= --ieee=synopsys
 GHDLRUNFLAGS= --stop-time=20ns
 
-SOURCES=or2/or2.vhdl or2/tb_or2.vhdl \
-        or3/or3.vhdl or3/tb_or3.vhdl \
-        and2/and2.vhdl and2/tb_and2.vhdl \
-        ha/ha.vhdl ha/tb_ha.vhdl \
-        fa/fa.vhdl fa/tb_fa.vhdl \
-        mux21/mux21.vhdl mux21/tb_mux21.vhdl \
-        mux21/mux21_1bit.vhdl mux21/tb_mux21_1bit.vhdl \
-        rca/rca.vhdl rca/tb_rca.vhdl \
-        comparator/comparator.vhdl comparator/tb_comparator.vhdl \
-        fd/fd.vhdl fd/tb_fd.vhdl \
-        ft/ft.vhdl ft/tb_ft.vhdl \
-        reg/reg.vhdl reg/tb_reg.vhdl \
-        counter/counter.vhdl counter/tb_counter.vhdl \
-        accumulator/accumulator.vhdl accumulator/tb_accumulator.vhdl
-
 TESTBENCHES=tb_or2 tb_or3 tb_and2 tb_ha tb_fa tb_rca \
             tb_mux21 tb_mux21_1bit tb_comparator \
             tb_fd tb_ft tb_reg tb_counter tb_accumulator
@@ -51,7 +36,7 @@ $(TESTBENCHES):
 
 # Syntax check target
 check:
-	$(GHDL) -s $(GHDLFLAGS) $(SOURCES)
+	$(GHDL) -s $(GHDLFLAGS) */*.vhdl
 
 # Run target
 run: $(TESTBENCHES) 
