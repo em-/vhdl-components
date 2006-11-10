@@ -4,7 +4,7 @@ GHDLRUNFLAGS= --stop-time=20ns
 
 TESTBENCHES=tb_or2 tb_or3 tb_and2 tb_ha tb_fa tb_rca \
             tb_mux21 tb_mux21_1bit tb_mux41 tb_mux41_1bit tb_comparator \
-            tb_fd tb_ft tb_reg tb_ld tb_counter tb_accumulator
+            tb_fd tb_ft tb_reg tb_ld tb_latch tb_counter tb_accumulator
 
 # Default target
 all: run
@@ -25,12 +25,14 @@ tb_fd: fd.o tb_fd.o
 tb_ft: ft.o tb_ft.o
 tb_reg: reg.o tb_reg.o
 tb_ld: ld.o tb_ld.o
+tb_latch: latch.o tb_latch.o
 tb_counter: counter.o tb_counter.o
 tb_accumulator: accumulator.o tb_accumulator.o
 
 comparator.o: fa.o
 rca.o: fa.o
 reg.o: fd.o
+latch.o: ld.o
 counter.o: ha.o fd.o
 accumulator.o: mux21.o rca.o reg.o
 
