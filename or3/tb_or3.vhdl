@@ -59,7 +59,6 @@ begin
         assert O = testO report "Mismatch on output O";
     end loop;
 
-    assert false report "Finished" severity note;
     wait;
 end process;
 

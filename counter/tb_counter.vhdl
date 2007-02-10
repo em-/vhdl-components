@@ -87,7 +87,6 @@ begin
         assert OWFL = testOWFL report "Mismatch on output OWFL";
     end loop;
 
-    assert false report "Finished" severity note;
     finished <= true;
     wait;
 end process;

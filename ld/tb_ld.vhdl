@@ -79,7 +79,6 @@ begin
         assert Q = testQ report "Mismatch on output Q";
     end loop;
 
-    assert false report "Finished" severity note;
     finished <= true;
     wait;
 end process;

@@ -64,7 +64,6 @@ begin
         assert Co = testCo report "Mismatch on output Co";
     end loop;
 
-    assert false report "Finished" severity note;
     wait;
 end process;
 
