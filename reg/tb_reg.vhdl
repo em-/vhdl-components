@@ -23,12 +23,14 @@ architecture test of tb_reg is
             O:        out std_logic_vector(N-1 downto 0));
 	end component;
 
+    signal finished: boolean := false;
 begin 
 	U: reg port map (CLK, RST, EN, A, O);
 
 clock: process
 begin
     CLK <= not CLK;
+    if finished then wait; end if;
     wait for 0.5 ns;
 end process;
 
@@ -84,6 +86,7 @@ begin
     end loop;
 
     assert false report "Finished" severity note;
+    finished <= true;
     wait;
 end process;
 

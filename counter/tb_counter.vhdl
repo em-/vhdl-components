@@ -24,12 +24,14 @@ architecture test of tb_counter is
         );
 	end component;
 
+    signal finished: boolean := false;
 begin 
 	U: counter port map (CLK, RST, EN, S, OWFL);
 
 clock: process
 begin
     CLK <= not CLK;
+    if finished then wait; end if;
     wait for 0.5 ns;
 end process;
 
@@ -86,6 +88,7 @@ begin
     end loop;
 
     assert false report "Finished" severity note;
+    finished <= true;
     wait;
 end process;
 

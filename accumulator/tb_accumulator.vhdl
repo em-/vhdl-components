@@ -25,12 +25,14 @@ architecture test of tb_accumulator is
     end component;
 
     signal clock_counter: integer := -1;
+    signal finished: boolean := false;
 begin 
 	U: accumulator port map (CLK, RST, EN, A, B, ACCUMULATE, O);
 
 clock: process
 begin
     CLK <= not CLK;
+    if finished then wait; end if;
     wait for 0.5 ns;
 end process;
 
@@ -93,6 +95,7 @@ begin
     end loop;
 
     assert false report "Finished" severity note;
+    finished <= true;
     wait;
 end process;
 
