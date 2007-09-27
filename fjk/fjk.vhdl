@@ -17,15 +17,16 @@ begin
         T_Q := '0';
     elsif CLK'event and CLK = '1' then
         JK := J & K;
-        if    JK = "00" then
-            T_Q := T_Q;
-        elsif JK = "10" then
-            T_Q := '1';
-        elsif JK = "01" then
-            T_Q := '0';
-        elsif JK = "11" then
-            T_Q := 'X';
-        end if;
+        case JK is
+            when "00" =>
+                T_Q := T_Q;
+            when "10" =>
+                T_Q := '1';
+            when "01" =>
+                T_Q := '0';
+            when "11" =>
+                T_Q := 'X';
+        end case;
     end if;
     Q <= T_Q;
 end process;
@@ -41,14 +42,17 @@ begin
         JK := J & K;
         if RST = '1' then
             T_Q := '0';
-        elsif JK = "00" then
-            T_Q := T_Q;
-        elsif JK = "10" then
-            T_Q := '1';
-        elsif JK = "01" then
-            T_Q := '0';
-        elsif JK = "11" then
-            T_Q := 'X';
+        else
+            case JK is
+                when "00" =>
+                    T_Q := T_Q;
+                when "10" =>
+                    T_Q := '1';
+                when "01" =>
+                    T_Q := '0';
+                when "11" =>
+                    T_Q := 'X';
+            end case;
         end if;
         Q <= T_Q;
     end if;
