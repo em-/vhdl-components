@@ -10,51 +10,45 @@ end fjk;
 architecture behavioral_async of fjk is
 begin
 process (CLK, RST)
-    variable T_Q: std_logic;
     variable JK: std_logic_vector (1 downto 0);
 begin
     if RST = '1' then
-        T_Q := '0';
+        Q <= '0';
     elsif CLK'event and CLK = '1' then
         JK := J & K;
         case JK is
             when "00" =>
-                T_Q := T_Q;
             when "10" =>
-                T_Q := '1';
+                Q <= '1';
             when "01" =>
-                T_Q := '0';
+                Q <= '0';
             when "11" =>
-                T_Q := 'X';
+                Q <= 'X';
         end case;
     end if;
-    Q <= T_Q;
 end process;
 end behavioral_async;
 
 architecture behavioral_sync of fjk is
 begin
 process (CLK)
-    variable T_Q: std_logic;
     variable JK: std_logic_vector (1 downto 0);
 begin
     if CLK'event and CLK = '1' then
         JK := J & K;
         if RST = '1' then
-            T_Q := '0';
+            Q <= '0';
         else
             case JK is
                 when "00" =>
-                    T_Q := T_Q;
                 when "10" =>
-                    T_Q := '1';
+                    Q <= '1';
                 when "01" =>
-                    T_Q := '0';
+                    Q <= '0';
                 when "11" =>
-                    T_Q := 'X';
+                    Q <= 'X';
             end case;
         end if;
-        Q <= T_Q;
     end if;
 end process;
 end behavioral_sync;
