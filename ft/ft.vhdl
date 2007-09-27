@@ -11,7 +11,7 @@ entity ft is
           Q:        out std_logic);
 end ft;
 
-architecture behavioral of ft is
+architecture behavioral_async of ft is
 begin
 
 process (CLK, RST)
@@ -28,4 +28,33 @@ begin
     end if;
     Q <= d;
 end process;
-end behavioral;
+end behavioral_async;
+
+architecture behavioral_sync of ft is
+begin
+
+process (CLK, RST)
+    variable d: std_logic;
+begin
+    if CLK'event and CLK = '1' then
+        if RST = '0' then
+            d := '0';
+        elsif T = '1' then
+            d := not d;
+        else
+            d := d;
+        end if;
+    end if;
+    Q <= d;
+end process;
+end behavioral_sync;
+
+configuration cfg_ft_behavioral_async of ft is
+    for behavioral_async
+    end for;
+end cfg_ft_behavioral_async;
+
+configuration cfg_ft_behavioral_sync of ft is
+    for behavioral_sync
+    end for;
+end cfg_ft_behavioral_sync;

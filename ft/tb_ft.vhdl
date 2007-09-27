@@ -81,3 +81,19 @@ begin
 end process;
 
 end test;
+
+configuration tb_ft_behavioral_async of tb_ft is
+    for test
+        for all: ft
+            use configuration work.cfg_ft_behavioral_async;
+        end for;
+    end for;
+end tb_ft_behavioral_async;
+
+configuration tb_ft_behavioral_sync of tb_ft is
+    for test
+        for all: ft
+            use configuration work.cfg_ft_behavioral_sync;
+        end for;
+    end for;
+end tb_ft_behavioral_sync;
