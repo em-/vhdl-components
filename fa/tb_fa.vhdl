@@ -68,3 +68,21 @@ begin
 end process;
 
 end test;
+
+
+configuration tb_fa_logic of tb_fa is
+   for test
+      for all: fa
+         use configuration work.cfg_fa_logic;
+      end for;
+   end for;
+end tb_fa_logic;
+
+configuration tb_fa_behavioral of tb_fa is
+   for test
+      for all: fa
+         use configuration work.cfg_fa_behavioral;
+      end for;
+   end for;
+end tb_fa_behavioral;
+
