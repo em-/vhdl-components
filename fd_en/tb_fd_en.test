@@ -1,4 +1,4 @@
--- Tests for fd
+-- Tests for fd_en
 -- time RST EN D Q
 1 011 0
 2 111 0

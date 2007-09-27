@@ -25,7 +25,7 @@ end process;
 end behavioral;
 
 architecture structural of reg is
-    component fd is
+    component fd_en is
         port (CLK, RST: in  std_logic;
               EN:       in  std_logic;
               D:        in  std_logic;
@@ -33,6 +33,6 @@ architecture structural of reg is
     end component;
 begin
     fd_vect: for i in N-1 downto 0 generate
-        fd_i: fd port map (CLK, RST, EN, A(i), O(i));
+        fd_i: fd_en port map (CLK, RST, EN, A(i), O(i));
     end generate;
 end structural;

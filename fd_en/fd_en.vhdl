@@ -1,14 +1,14 @@
 library ieee; 
 use ieee.std_logic_1164.all; 
 
-entity fd is
+entity fd_en is
     port (CLK, RST: in  std_logic;
           EN:       in  std_logic;
           D:        in  std_logic;
           Q:        out std_logic);
-end fd;
+end fd_en;
 
-architecture behavioral of fd is
+architecture behavioral of fd_en is
 begin
 process (CLK, RST)
 begin

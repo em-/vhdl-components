@@ -17,7 +17,7 @@ architecture structural of counter is
               Co:   out std_logic);
     end component;
 
-    component fd
+    component fd_en
         port (CLK, RST: in  std_logic;
               EN:       in  std_logic;
               D:        in  std_logic;
@@ -32,6 +32,6 @@ begin
 
     count: for i in N-1 downto 0 generate
         ha_i: ha port map (S(i), carry(i), sum(i), carry(i+1));
-        fd_i: fd port map (CLK, RST, EN, sum(i), S(i));
+        fd_en_i: fd_en port map (CLK, RST, EN, sum(i), S(i));
     end generate;
 end structural;
