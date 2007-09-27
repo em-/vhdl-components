@@ -21,35 +21,32 @@ begin
         variable input: std_logic_vector (2 downto 0);
     begin
         input := A & B & Ci;
-        if    input = "000" then
-            S  <= '0' after DELAY_S;
-            Co <= '0' after DELAY_Co;
-        elsif input = "001" then
-            S  <= '1' after DELAY_S;
-            Co <= '0' after DELAY_Co;
-        elsif input = "010" then
-            S  <= '1' after DELAY_S;
-            Co <= '0' after DELAY_Co;
-        elsif input = "011" then
-            S  <= '0' after DELAY_S;
-            Co <= '1' after DELAY_Co;
-        elsif input = "100" then
-            S  <= '1' after DELAY_S;
-            Co <= '0' after DELAY_Co;
-        elsif input = "101" then
-            S  <= '0' after DELAY_S;
-            Co <= '1' after DELAY_Co;
-        elsif input = "110" then
-            S  <= '0' after DELAY_S;
-            Co <= '1' after DELAY_Co;
-        elsif input = "111" then
-            S  <= '1' after DELAY_S;
-            Co <= '1' after DELAY_Co;
-        else
-            -- not reached
-            S  <= '0' after DELAY_S;
-            Co <= '0' after DELAY_Co;
-        end if;
+        case input is
+            when "000" =>
+                S  <= '0' after DELAY_S;
+                Co <= '0' after DELAY_Co;
+            when "001" =>
+                S  <= '1' after DELAY_S;
+                Co <= '0' after DELAY_Co;
+            when "010" =>
+                S  <= '1' after DELAY_S;
+                Co <= '0' after DELAY_Co;
+            when "011" =>
+                S  <= '0' after DELAY_S;
+                Co <= '1' after DELAY_Co;
+            when "100" =>
+                S  <= '1' after DELAY_S;
+                Co <= '0' after DELAY_Co;
+            when "101" =>
+                S  <= '0' after DELAY_S;
+                Co <= '1' after DELAY_Co;
+            when "110" =>
+                S  <= '0' after DELAY_S;
+                Co <= '1' after DELAY_Co;
+            when "111" =>
+                S  <= '1' after DELAY_S;
+                Co <= '1' after DELAY_Co;
+        end case;
     end process;
 end behavioral;
 
