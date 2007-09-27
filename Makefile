@@ -7,6 +7,8 @@ TESTBENCHES=tb_or2			\
 	    tb_and2			\
 	    tb_iv_behavioral		\
 	    tb_iv_behavioral_delay	\
+	    tb_exor_logic		\
+	    tb_exor_behavioral		\
 	    tb_ha			\
 	    tb_fa			\
 	    tb_rca			\
@@ -34,6 +36,9 @@ tb_and2: and2.o tb_and2.o
 tb_iv_behavioral: tb_iv.o
 tb_iv_behavioral_delay: tb_iv.o
 tb_iv.o: iv.o
+tb_exor_logic: tb_exor.o
+tb_exor_behavioral: tb_exor.o
+tb_exor.o: exor.o
 tb_ha: ha.o tb_ha.o
 tb_fa: fa.o tb_fa.o
 tb_mux21: mux21.o tb_mux21.o
