@@ -23,8 +23,8 @@ begin
             T_Q := '1';
         elsif JK = "01" then
             T_Q := '0';
-        else
-            T_Q := T_Q;
+        elsif JK = "11" then
+            T_Q := 'X';
         end if;
     end if;
     Q <= T_Q;
@@ -47,8 +47,8 @@ begin
             T_Q := '1';
         elsif JK = "01" then
             T_Q := '0';
-        else
-            T_Q := T_Q;
+        elsif JK = "11" then
+            T_Q := 'X';
         end if;
         Q <= T_Q;
     end if;
