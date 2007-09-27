@@ -35,10 +35,10 @@ process (CLK)
     variable JK: std_logic_vector (1 downto 0);
 begin
     if CLK'event and CLK = '1' then
-        JK := J & K;
         if RST = '1' then
             Q <= '0';
         else
+            JK := J & K;
             case JK is
                 when "00" =>
                 when "10" =>
