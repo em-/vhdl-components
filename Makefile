@@ -2,9 +2,25 @@ GHDL=ghdl
 GHDLFLAGS= --ieee=synopsys
 GHDLRUNFLAGS=
 
-TESTBENCHES=tb_or2 tb_or3 tb_and2 tb_ha tb_fa tb_rca \
-            tb_mux21 tb_mux21_1bit tb_mux41 tb_mux41_1bit tb_comparator \
-            tb_fd tb_ft_behavioral_async tb_ft_behavioral_sync tb_reg tb_ld tb_latch tb_counter tb_accumulator
+TESTBENCHES=tb_or2			\
+	    tb_or3			\
+	    tb_and2			\
+	    tb_ha			\
+	    tb_fa			\
+	    tb_rca			\
+	    tb_mux21			\
+	    tb_mux21_1bit		\
+	    tb_mux41			\
+	    tb_mux41_1bit		\
+	    tb_comparator		\
+	    tb_fd			\
+	    tb_ft_behavioral_async	\
+	    tb_ft_behavioral_sync	\
+	    tb_reg			\
+	    tb_ld			\
+	    tb_latch			\
+	    tb_counter			\
+	    tb_accumulator
 
 # Default target
 all: run
