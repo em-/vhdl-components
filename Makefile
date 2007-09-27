@@ -91,8 +91,9 @@ check:
 
 # Run target
 run: $(TESTBENCHES) 
-	for i in $^; do echo $$i; $(GHDL) -r $$i $(GHDLRUNFLAGS); done
+	for i in $^; do echo $$i; $(GHDL) -r $$i --vcd=$${i}.vcd $(GHDLRUNFLAGS); done
 
 # Clean target
 clean:
 	-ghdl --remove
+	-rm -f *.vcd
