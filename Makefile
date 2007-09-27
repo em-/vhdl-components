@@ -23,6 +23,8 @@ TESTBENCHES=tb_or2			\
 	    tb_fd_behavioral_sync	\
 	    tb_ft_behavioral_async	\
 	    tb_ft_behavioral_sync	\
+	    tb_fjk_behavioral_async	\
+	    tb_fjk_behavioral_sync	\
 	    tb_reg			\
 	    tb_ld			\
 	    tb_latch			\
@@ -59,6 +61,9 @@ tb_fd.o: fd.o
 tb_ft_behavioral_async: tb_ft.o
 tb_ft_behavioral_sync: tb_ft.o
 tb_ft.o: ft.o
+tb_fjk_behavioral_async: tb_fjk.o
+tb_fjk_behavioral_sync: tb_fjk.o
+tb_fjk.o: fjk.o
 tb_reg: reg.o tb_reg.o
 tb_ld: ld.o tb_ld.o
 tb_latch: latch.o tb_latch.o
