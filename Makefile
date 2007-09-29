@@ -26,7 +26,7 @@ TESTBENCHES=tb_or2			\
 	    tb_fjk_behavioral_async	\
 	    tb_fjk_behavioral_sync	\
 	    tb_reg			\
-	    tb_ld			\
+	    tb_ld_en			\
 	    tb_latch			\
 	    tb_counter			\
 	    tb_accumulator
@@ -65,7 +65,7 @@ tb_fjk_behavioral_async: tb_fjk.o
 tb_fjk_behavioral_sync: tb_fjk.o
 tb_fjk.o: fjk.o
 tb_reg: reg.o tb_reg.o
-tb_ld: ld.o tb_ld.o
+tb_ld_en: ld_en.o tb_ld_en.o
 tb_latch: latch.o tb_latch.o
 tb_counter: counter.o tb_counter.o
 tb_accumulator: accumulator.o tb_accumulator.o
@@ -73,7 +73,7 @@ tb_accumulator: accumulator.o tb_accumulator.o
 comparator.o: fa.o
 rca.o: fa.o
 reg.o: fd_en.o
-latch.o: ld.o
+latch.o: ld_en.o
 counter.o: ha.o fd_en.o
 accumulator.o: mux21.o rca.o reg.o
 

@@ -25,7 +25,7 @@ end process;
 end behavioral;
 
 architecture structural of latch is
-    component ld is
+    component ld_en is
         port (CLK, RST: in  std_logic;
               EN:       in  std_logic;
               D:        in  std_logic;
@@ -33,6 +33,6 @@ architecture structural of latch is
     end component;
 begin
     ld_vect: for i in N-1 downto 0 generate
-        ld_i: ld port map (CLK, RST, EN, A(i), O(i));
+        ld_i: ld_en port map (CLK, RST, EN, A(i), O(i));
     end generate;
 end structural;

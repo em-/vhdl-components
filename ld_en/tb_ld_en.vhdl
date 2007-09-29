@@ -5,25 +5,25 @@ use std.textio.all;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_textio.all; -- synopsys only
 
-entity tb_ld is
-end tb_ld;
+entity tb_ld_en is
+end tb_ld_en;
 
-architecture test of tb_ld is
+architecture test of tb_ld_en is
     signal CLK, RST: std_logic := '0';
     signal EN, D: std_logic;
     signal Q: std_logic;
     signal counter: integer := -1;
-	
-	component ld port (
+
+    component ld_en port (
         CLK, RST: in  std_logic;
         EN:       in  std_logic;
         D:        in  std_logic;
         Q:        out std_logic);
-	end component;
+    end component;
 
     signal finished: boolean := false;
-begin 
-	U: ld port map (CLK, RST, EN, D, Q);
+begin
+    U: ld_en port map (CLK, RST, EN, D, Q);
 
 clock: process
 begin
@@ -41,7 +41,7 @@ end process;
 
 test: process
     variable testRST, testEN, testD, testQ: std_logic;
-    file test_file: text is in "ld/tb_ld.test";
+    file test_file: text is in "ld_en/tb_ld_en.test";
 
     variable l: line;
     variable t: integer;
