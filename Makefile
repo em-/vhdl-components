@@ -5,6 +5,9 @@ GHDLRUNFLAGS=
 TESTBENCHES=tb_or2			\
 	    tb_or3			\
 	    tb_and2			\
+	    tb_nand2_logic		\
+	    tb_nand2_logic_transport	\
+	    tb_nand2_behavioral		\
 	    tb_iv_behavioral		\
 	    tb_iv_behavioral_delay	\
 	    tb_exor_logic		\
@@ -39,6 +42,10 @@ all: run
 tb_or2: or2.o tb_or2.o
 tb_or3: or3.o tb_or3.o
 tb_and2: and2.o tb_and2.o
+tb_nand2_logic: tb_nand2.o
+tb_nand2_logic_transport: tb_nand2.o
+tb_nand2_behavioral: tb_nand2.o
+tb_nand2.o: nand2.o
 tb_iv_behavioral: tb_iv.o
 tb_iv_behavioral_delay: tb_iv.o
 tb_iv.o: iv.o
