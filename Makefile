@@ -26,6 +26,7 @@ TESTBENCHES=tb_or2			\
 	    tb_fjk_behavioral_async	\
 	    tb_fjk_behavioral_sync	\
 	    tb_reg			\
+	    tb_ld			\
 	    tb_ld_en			\
 	    tb_latch			\
 	    tb_counter			\
@@ -65,6 +66,7 @@ tb_fjk_behavioral_async: tb_fjk.o
 tb_fjk_behavioral_sync: tb_fjk.o
 tb_fjk.o: fjk.o
 tb_reg: reg.o tb_reg.o
+tb_ld: ld.o tb_ld.o
 tb_ld_en: ld_en.o tb_ld_en.o
 tb_latch: latch.o tb_latch.o
 tb_counter: counter.o tb_counter.o
