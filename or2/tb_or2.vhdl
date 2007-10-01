@@ -12,53 +12,46 @@ architecture test of tb_or2 is
     signal A: std_logic := '0';
     signal B: std_logic := '0';
     signal O: std_logic;
-	
-	component or2 port (
-        A, B: in std_logic;
-        O: out std_logic);
-	end component;
 
+    component or2
+        generic (DELAY: time);
+        port (A, B: in  std_logic;
+              O:    out std_logic);
+    end component;
 begin 
-	U: or2 port map (A, B, O);
+    U: or2
+        generic map (DELAY => 0.2 ns)
+        port map (A, B, O);
 
-test: process
-    variable testA, testB, testO: std_logic;
-    file test_file: text is in "or2/tb_or2.test";
+    A <= '0' after 1 ns, '1' after 2 ns, '0' after 10 ns,
+         '1' after 12 ns, '0' after 12.05 ns,
+         '1' after 13 ns, '0' after 13.11 ns;
+    B <= '0' after 1 ns, '1' after 3 ns, '0' after 11 ns,
+         '1' after 12 ns, '0' after 12.05 ns,
+         '1' after 13 ns, '0' after 13.11 ns;
 
-    variable l: line;
-    variable t: time;
-    variable i: integer;
-    variable good: boolean;
-    variable space: character;
-begin
-    while not endfile(test_file) loop
-        readline(test_file, l);
-
-        -- read the time from the beginning of the line
-        -- skip the line if it doesn't start with an integer
-        read(l, i, good => good);
-        next when not good;
-
-        read(l, space); -- skip a space
-
-        read(l, testA);  -- read A value
-        read(l, testB);  -- read B value
-        read(l, testO);  -- read O value
-
-        A <= testA;
-        B <= testB;
-
-        t := i * 1 ns;  -- convert an integer to time
-        if (now < t) then
-            wait for t - now;
-        end if;
-        
-        assert O = testO report "Mismatch on output O";
-    end loop;
-
-    wait;
-end process;
-
+    process
+    begin
+        wait for 1.201 ns;
+        assert O = '0';
+        wait for 1 ns; -- 2.201 ns
+        assert O = '1';
+        wait for 1 ns; -- 3.201 ns
+        assert O = '1';
+        wait for 7 ns; -- 10.201 ns
+        assert O = '1';
+        wait for 1 ns; -- 11.201 ns
+        assert O = '0';
+        wait for 1 ns; -- 12.201 ns
+        -- '1' if delay model is transport, '0' otherwise
+        wait for 0.05 ns; -- 12.251 ns
+        assert O = '0';
+        wait for 0.95 ns; -- 13.201 ns
+        -- '1' if delay model is transport, '0' otherwise
+        wait for 0.11 ns; -- 13.311 ns
+        assert O = '0';
+        wait;
+    end process;
 end test;
 
 
