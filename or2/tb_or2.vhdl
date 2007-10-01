@@ -60,3 +60,28 @@ begin
 end process;
 
 end test;
+
+
+configuration tb_or2_logic of tb_or2 is
+   for test
+      for all: or2
+         use configuration work.cfg_or2_logic;
+      end for;
+   end for;
+end tb_or2_logic;
+
+configuration tb_or2_logic_transport of tb_or2 is
+   for test
+      for all: or2
+         use configuration work.cfg_or2_logic_transport;
+      end for;
+   end for;
+end tb_or2_logic_transport;
+
+configuration tb_or2_behavioral of tb_or2 is
+   for test
+      for all: or2
+         use configuration work.cfg_or2_behavioral;
+      end for;
+   end for;
+end tb_or2_behavioral;

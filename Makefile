@@ -2,7 +2,9 @@ GHDL=ghdl
 GHDLFLAGS= --ieee=synopsys
 GHDLRUNFLAGS=
 
-TESTBENCHES=tb_or2			\
+TESTBENCHES=tb_or2_logic		\
+	    tb_or2_logic_transport	\
+	    tb_or2_behavioral		\
 	    tb_or3			\
 	    tb_and2			\
 	    tb_nand2_logic		\
@@ -39,7 +41,10 @@ TESTBENCHES=tb_or2			\
 all: run
 
 # Testbenches dependencies
-tb_or2: or2.o tb_or2.o
+tb_or2_logic: tb_or2.o
+tb_or2_logic_transport: tb_or2.o
+tb_or2_behavioral: tb_or2.o
+tb_or2.o: or2.o
 tb_or3: or3.o tb_or3.o
 tb_and2: and2.o tb_and2.o
 tb_nand2_logic: tb_nand2.o
