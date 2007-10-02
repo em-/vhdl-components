@@ -49,12 +49,12 @@ begin
 end structural;
 
 
-configuration cfg_mux21_behavioral of mux21_1bit is
+configuration cfg_mux21_1bit_behavioral of mux21_1bit is
     for behavioral
     end for;
-end cfg_mux21_behavioral;
+end cfg_mux21_1bit_behavioral;
 
-configuration cfg_mux21_structural of mux21_1bit is
+configuration cfg_mux21_1bit_structural of mux21_1bit is
     for structural
         for all: iv
                 use configuration work.cfg_iv_behavioral;
@@ -63,4 +63,4 @@ configuration cfg_mux21_structural of mux21_1bit is
                 use configuration work.cfg_nand2_logic;
         end for;
     end for;
-end cfg_mux21_structural;
+end cfg_mux21_1bit_structural;

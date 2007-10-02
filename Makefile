@@ -19,7 +19,8 @@ TESTBENCHES=tb_or2_logic		\
 	    tb_fa_behavioral		\
 	    tb_rca			\
 	    tb_mux21			\
-	    tb_mux21_1bit		\
+	    tb_mux21_1bit_behavioral	\
+	    tb_mux21_1bit_structural	\
 	    tb_mux41			\
 	    tb_mux41_1bit		\
 	    tb_comparator		\
@@ -61,8 +62,10 @@ tb_ha: ha.o tb_ha.o
 tb_fa_logic: tb_fa.o
 tb_fa_behavioral: tb_fa.o
 tb_fa.o: fa.o
+tb_mux21_1bit_behavioral: tb_mux21_1bit.o
+tb_mux21_1bit_structural: tb_mux21_1bit.o
+tb_mux21_1bit.o: mux21_1bit.o
 tb_mux21: mux21.o tb_mux21.o
-tb_mux21_1bit: mux21_1bit.o tb_mux21_1bit.o
 tb_mux41: mux41.o tb_mux41.o
 tb_mux41_1bit: mux41_1bit.o tb_mux41_1bit.o
 tb_comparator: comparator.o tb_comparator.o
