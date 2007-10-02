@@ -18,9 +18,10 @@ TESTBENCHES=tb_or2_logic		\
 	    tb_fa_logic			\
 	    tb_fa_behavioral		\
 	    tb_rca			\
-	    tb_mux21			\
 	    tb_mux21_1bit_behavioral	\
 	    tb_mux21_1bit_structural	\
+	    tb_mux21_behavioral		\
+	    tb_mux21_structural		\
 	    tb_mux41			\
 	    tb_mux41_1bit		\
 	    tb_comparator		\
@@ -65,7 +66,9 @@ tb_fa.o: fa.o
 tb_mux21_1bit_behavioral: tb_mux21_1bit.o
 tb_mux21_1bit_structural: tb_mux21_1bit.o
 tb_mux21_1bit.o: mux21_1bit.o
-tb_mux21: mux21.o tb_mux21.o
+tb_mux21_behavioral: tb_mux21.o
+tb_mux21_structural: tb_mux21.o
+tb_mux21.o: mux21.o
 tb_mux41: mux41.o tb_mux41.o
 tb_mux41_1bit: mux41_1bit.o tb_mux41_1bit.o
 tb_comparator: comparator.o tb_comparator.o
@@ -93,6 +96,7 @@ reg.o: fd_en.o
 latch.o: ld_en.o
 counter.o: ha.o fd_en.o
 accumulator.o: mux21.o rca.o reg.o
+mux21.o: mux21_1bit.o
 
 # Elaboration target
 $(TESTBENCHES):

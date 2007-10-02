@@ -71,3 +71,20 @@ begin
 end process;
 
 end test;
+
+
+configuration tb_mux21_structural of tb_mux21 is
+   for test
+      for all: mux21
+         use configuration work.cfg_mux21_structural;
+      end for;
+   end for;
+end tb_mux21_structural;
+
+configuration tb_mux21_behavioral of tb_mux21 is
+   for test
+      for all: mux21
+         use configuration work.cfg_mux21_behavioral;
+      end for;
+   end for;
+end tb_mux21_behavioral;

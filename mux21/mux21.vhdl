@@ -20,3 +20,27 @@ begin
     end if;
 end process;
 end behavioral;
+
+architecture structural of mux21 is
+    component mux21_1bit
+        port (A, B: in  std_logic;
+              SEL:  in  std_logic;
+              O:    out std_logic);
+    end component;
+begin
+    mux_vect: for i in 0 to N-1 
+    generate
+        mux_i: mux21_1bit port map (A(i), B(i), SEL, O(i));
+    end generate;
+end structural;
+
+
+configuration cfg_mux21_behavioral of mux21 is
+    for behavioral
+    end for;
+end cfg_mux21_behavioral;
+
+configuration cfg_mux21_structural of mux21 is
+    for structural
+    end for;
+end cfg_mux21_structural;
