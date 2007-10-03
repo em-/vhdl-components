@@ -71,3 +71,20 @@ begin
     wait;
 end process;
 end test;
+
+
+configuration tb_rca_behavioral of tb_rca is
+    for test
+        for all: rca
+            use configuration work.cfg_rca_behavioral;
+        end for;
+    end for;
+end tb_rca_behavioral;
+
+configuration tb_rca_structural of tb_rca is
+    for test
+        for all: rca
+            use configuration work.cfg_rca_structural;
+        end for;
+    end for;
+end tb_rca_structural;
