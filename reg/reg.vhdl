@@ -36,3 +36,14 @@ begin
         fd_i: fd_en port map (CLK, RST, EN, A(i), O(i));
     end generate;
 end structural;
+
+
+configuration cfg_reg_behavioral of reg is
+    for behavioral
+    end for;
+end cfg_reg_behavioral;
+
+configuration cfg_reg_structural of reg is
+    for structural
+    end for;
+end cfg_reg_structural;

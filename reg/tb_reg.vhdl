@@ -88,5 +88,21 @@ begin
     finished <= true;
     wait;
 end process;
-
 end test;
+
+
+configuration tb_reg_behavioral of tb_reg is
+    for test
+        for all: reg
+            use configuration work.cfg_reg_behavioral;
+        end for;
+    end for;
+end tb_reg_behavioral;
+
+configuration tb_reg_structural of tb_reg is
+    for test
+        for all: reg
+            use configuration work.cfg_reg_structural;
+        end for;
+    end for;
+end tb_reg_structural;
