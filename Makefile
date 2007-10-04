@@ -37,6 +37,7 @@ TESTBENCHES=tb_or2_logic		\
 	    tb_ld			\
 	    tb_ld_en			\
 	    tb_latch			\
+	    tb_string_recognizer	\
 	    tb_counter			\
 	    tb_accumulator
 
@@ -90,6 +91,7 @@ tb_reg: reg.o tb_reg.o
 tb_ld: ld.o tb_ld.o
 tb_ld_en: ld_en.o tb_ld_en.o
 tb_latch: latch.o tb_latch.o
+tb_string_recognizer: string_recognizer.o tb_string_recognizer.o
 tb_counter: counter.o tb_counter.o
 tb_accumulator: accumulator.o tb_accumulator.o
 
