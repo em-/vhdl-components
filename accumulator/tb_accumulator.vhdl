@@ -67,22 +67,12 @@ begin
             read(l, t, good => good);
             next when not good;
 
-            read(l, space);
-
             read(l, testRST);
             read(l, testEN);
             read(l, testACCUMULATE);
 
-            read(l, space);
-
             read(l, testA);
-
-            read(l, space);
-
             read(l, testB);
-
-            read(l, space);
-
             read(l, testO);
 
             while clock_counter /= t loop
