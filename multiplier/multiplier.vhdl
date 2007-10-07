@@ -44,18 +44,18 @@ begin
     C(0) <= (others => '0');
 
     row: for i in 1 to N-1 generate
-    O(i-1) <= S(i-1)(0);
+        O(i-1) <= S(i-1)(0);
 
-    ha00: ha
-    port map (S(i-1)(1), tAND(i)(0), S(i)(0), C(i)(0));
+        ha_i_first: ha
+        port map (S(i-1)(1), tAND(i)(0), S(i)(0), C(i)(0));
 
-    fas: for j in 1 to N-2 generate
-    fas_ij: fa
-    port map (S(i-1)(j+1), tAND(i)(j), C(i)(j-1), S(i)(j), C(i)(j));
-    end generate;
+        fas: for j in 1 to N-2 generate
+            fas_ij: fa
+            port map (S(i-1)(j+1), tAND(i)(j), C(i)(j-1), S(i)(j), C(i)(j));
+        end generate;
 
-    fa03: fa
-    port map (C(i-1)(N-1), tAND(i)(N-1), C(i)(N-2), S(i)(N-1), C(i)(N-1));
+        fa_i_last: fa
+        port map (C(i-1)(N-1), tAND(i)(N-1), C(i)(N-2), S(i)(N-1), C(i)(N-1));
     end generate;
 
     O(2*N-2 downto N-1) <= S(N-1);
