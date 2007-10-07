@@ -48,10 +48,12 @@ begin
 
     ha00: ha
     port map (S(i-1)(1), tAND(i)(0), S(i)(0), C(i)(0));
-    fa01: fa
-    port map (S(i-1)(2), tAND(i)(1), C(i)(0), S(i)(1), C(i)(1));
-    fa02: fa
-    port map (S(i-1)(3), tAND(i)(2), C(i)(1), S(i)(2), C(i)(2));
+
+    fas: for j in 1 to N-2 generate
+    fas_ij: fa
+    port map (S(i-1)(j+1), tAND(i)(j), C(i)(j-1), S(i)(j), C(i)(j));
+    end generate;
+
     fa03: fa
     port map (C(i-1)(3), tAND(i)(3), C(i)(2), S(i)(3), C(i)(3));
     end generate;
