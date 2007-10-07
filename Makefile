@@ -37,6 +37,7 @@ TESTBENCHES=tb_or2_logic		\
 	    tb_fjk_behavioral_sync	\
 	    tb_reg_behavioral		\
 	    tb_reg_structural		\
+	    tb_registerfile_behavioral	\
 	    tb_ld			\
 	    tb_ld_en			\
 	    tb_latch			\
@@ -100,6 +101,8 @@ tb_fjk.o: fjk.o
 tb_reg_behavioral: tb_reg.o
 tb_reg_structural: tb_reg.o
 tb_reg.o: reg.o
+tb_registerfile_behavioral: tb_registerfile.o
+tb_registerfile.o: registerfile.o
 tb_ld: ld.o tb_ld.o
 tb_ld_en: ld_en.o tb_ld_en.o
 tb_latch: latch.o tb_latch.o
