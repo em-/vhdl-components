@@ -6,7 +6,8 @@ entity tb_rca is
 end tb_rca;
 
 architecture test of tb_rca is
-    signal A, B, S: std_logic_vector(2 downto 0);
+    constant N: integer := 4;
+    signal A, B, S: std_logic_vector(N-1 downto 0);
     signal Ci, Co: std_logic;
 	
 	component rca
@@ -17,7 +18,7 @@ architecture test of tb_rca is
               Co:   out std_logic);
 	end component;
 begin 
-	U: rca generic map (3) port map (A, B, Ci, S, Co);
+    u: rca generic map (N) port map (A, B, Ci, S, Co);
 
 test: process
         variable i, j: integer;
