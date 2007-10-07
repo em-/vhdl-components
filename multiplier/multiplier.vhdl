@@ -40,40 +40,42 @@ begin
         end generate;
     end generate;
 
-    O(0) <= tAND(0)(0);
+    S(0) <= tAND(0);
+
+    O(0) <= S(0)(0);
 
     ha00: ha
-    port map (tAND(0)(1), tAND(1)(0), S(0)(0), C(0)(0));
+    port map (S(0)(1), tAND(1)(0), S(1)(0), C(0)(0));
     fa01: fa
-    port map (tAND(0)(2), tAND(1)(1), C(0)(0), S(0)(1), C(0)(1));
+    port map (S(0)(2), tAND(1)(1), C(0)(0), S(1)(1), C(0)(1));
     fa02: fa
-    port map (tAND(0)(3), tAND(1)(2), C(0)(1), S(0)(2), C(0)(2));
+    port map (S(0)(3), tAND(1)(2), C(0)(1), S(1)(2), C(0)(2));
     ha03: ha
-    port map (tAND(1)(3), C(0)(2), S(0)(3), C(0)(3));
+    port map (tAND(1)(3), C(0)(2), S(1)(3), C(0)(3));
 
-    O(1) <= S(0)(0);
+    O(1) <= S(1)(0);
 
     ha10: ha
-    port map (S(0)(1), tAND(2)(0), S(1)(0), C(1)(0));
+    port map (S(1)(1), tAND(2)(0), S(2)(0), C(1)(0));
     fa11: fa
-    port map (S(0)(2), tAND(2)(1), C(1)(0), S(1)(1), C(1)(1));
+    port map (S(1)(2), tAND(2)(1), C(1)(0), S(2)(1), C(1)(1));
     fa12: fa
-    port map (S(0)(3), tAND(2)(2), C(1)(1), S(1)(2), C(1)(2));
+    port map (S(1)(3), tAND(2)(2), C(1)(1), S(2)(2), C(1)(2));
     fa13: fa
-    port map (C(0)(3), tAND(2)(3), C(1)(2), S(1)(3), C(1)(3));
+    port map (C(0)(3), tAND(2)(3), C(1)(2), S(2)(3), C(1)(3));
 
-    O(2) <= S(1)(0);
+    O(2) <= S(2)(0);
 
     ha20: ha
-    port map (S(1)(1), tAND(3)(0), S(2)(0), C(2)(0));
+    port map (S(2)(1), tAND(3)(0), S(3)(0), C(2)(0));
     fa21: fa
-    port map (S(1)(2), tAND(3)(1), C(2)(0), S(2)(1), C(2)(1));
+    port map (S(2)(2), tAND(3)(1), C(2)(0), S(3)(1), C(2)(1));
     fa22: fa
-    port map (S(1)(3), tAND(3)(2), C(2)(1), S(2)(2), C(2)(2));
+    port map (S(2)(3), tAND(3)(2), C(2)(1), S(3)(2), C(2)(2));
     fa23: fa
-    port map (C(1)(3), tAND(3)(3), C(2)(2), S(2)(3), C(2)(3));
+    port map (C(1)(3), tAND(3)(3), C(2)(2), S(3)(3), C(2)(3));
 
-    O(6 downto 3) <= S(2);
+    O(6 downto 3) <= S(3);
     O(7) <= C(2)(3);
 end structural;
 
