@@ -56,8 +56,8 @@ begin
     port map (C(i-1)(3), tAND(i)(3), C(i)(2), S(i)(3), C(i)(3));
     end generate;
 
-    O(6 downto 3) <= S(3);
-    O(7) <= C(3)(3);
+    O(2*N-2 downto N-1) <= S(N-1);
+    O(2*N-1) <= C(N-1)(N-1);
 end structural;
 
 configuration cfg_multiplier_behavioral of multiplier is
