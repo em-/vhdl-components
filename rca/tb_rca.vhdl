@@ -21,13 +21,11 @@ begin
     u: rca generic map (N) port map (A, B, Ci, S, Co);
 
     test: process
-        variable i, j: integer;
+        constant max: natural := 2**N - 1;
         variable sum: unsigned (S'Length downto 0);
     begin
-        i := 0;
-        while i < (2**(A'Length)) loop
-            j := 0;
-            while j < (2**(B'Length)) loop
+        for i in 0 to max loop
+            for j in 0 to max loop
                 A <= std_logic_vector(to_unsigned(i, A'Length));
                 B <= std_logic_vector(to_unsigned(j, B'Length));
                 Ci <= '1';
@@ -39,9 +37,7 @@ begin
                            "+1=" & integer'Image(i+j+1) &
                            " got " & integer'Image(to_integer(unsigned(S))) &
                            " + " & std_logic'Image(Co);
-                j := j + 1;
             end loop;
-            i := i + 1;
         end loop;
         wait;
     end process;
