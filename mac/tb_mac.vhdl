@@ -17,11 +17,11 @@ architecture test of tb_mac is
 
     component mac
         generic (N: integer := 3);
-        port (CLK, RST:   in    std_logic;
-              EN:         in    std_logic;
-              A, B:       in    std_logic_vector (N-1 downto 0);
-              ACCUMULATE: in    std_logic;
-              O:          inout std_logic_vector (2*N-1 downto 0));
+        port (CLK, RST:   in  std_logic;
+              EN:         in  std_logic;
+              A, B:       in  std_logic_vector (N-1 downto 0);
+              ACCUMULATE: in  std_logic;
+              O:          out std_logic_vector (2*N-1 downto 0));
     end component;
 
     signal clock_counter: integer := -1;
@@ -91,6 +91,8 @@ begin
         ACCUMULATE <= testACCUMULATE;
         A <= testA;
         B <= testB;
+
+        wait for 1 ps;
 
         assert O = testO report "Mismatch on output O";
     end loop;

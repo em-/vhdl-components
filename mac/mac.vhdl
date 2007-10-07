@@ -4,11 +4,11 @@ use ieee.numeric_std.all;
 
 entity mac is
     generic (N: integer := 8);
-    port (CLK, RST:   in    std_logic;
-          EN:         in    std_logic;
-          A, B:       in    std_logic_vector (N-1 downto 0);
-          ACCUMULATE: in    std_logic;
-          O:          inout std_logic_vector (2*N-1 downto 0));
+    port (CLK, RST:   in  std_logic;
+          EN:         in  std_logic;
+          A, B:       in  std_logic_vector (N-1 downto 0);
+          ACCUMULATE: in  std_logic;
+          O:          out std_logic_vector (2*N-1 downto 0));
 end mac;
 
 architecture behavioral of mac is
@@ -33,6 +33,7 @@ end behavioral;
 architecture structural of mac is
     signal OUT_MUX:  std_logic_vector (N-1 downto 0);
     signal OUT_MULT: std_logic_vector (2*N-1 downto 0);
+    signal OUT_REG:  std_logic_vector (2*N-1 downto 0);
 
     component mux21
         generic (N: integer := 8);
@@ -55,9 +56,11 @@ architecture structural of mac is
               O:         out std_logic_vector (N-1 downto 0));
     end component;
 begin
+    O <= OUT_REG;
+
     input: mux21
             generic map (N)
-            port map (B, O(B'Range), ACCUMULATE, OUT_MUX);
+            port map (B, OUT_REG(B'Range), ACCUMULATE, OUT_MUX);
 
     mult: multiplier
             generic map (N => N)
@@ -65,7 +68,7 @@ begin
 
     data: reg
             generic map (2*N)
-            port map (CLK, RST, EN, OUT_MULT, O);
+            port map (CLK, RST, EN, OUT_MULT, OUT_REG);
 end structural;
 
 
