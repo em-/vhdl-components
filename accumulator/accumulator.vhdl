@@ -1,5 +1,6 @@
 library ieee; 
 use ieee.std_logic_1164.all; 
+use ieee.numeric_std.all;
 
 entity accumulator is
     generic (N: integer := 8);
@@ -10,6 +11,24 @@ entity accumulator is
           O:          inout std_logic_vector (N-1 downto 0));
 end accumulator;
 
+architecture behavioral of accumulator is
+begin
+    process (RST, CLK)
+        variable feedback: unsigned (O'Range);
+    begin
+        if RST = '0' then
+            feedback := (others => '0');
+        elsif CLK = '1' and CLK'event and EN = '0' then
+            if ACCUMULATE = '0' then
+                feedback := unsigned(A) + unsigned(B);
+            else
+                feedback := unsigned(A) + feedback;
+            end if;
+        end if;
+
+        O <= std_logic_vector(feedback);
+    end process;
+end behavioral;
 
 architecture structural of accumulator is
     signal OUT_MUX:  std_logic_vector (N-1 downto 0);
@@ -50,3 +69,14 @@ begin
             generic map (N)
             port map (CLK, RST, EN, OUT_ADD, O);
 end structural;
+
+
+configuration cfg_accumulator_behavioral of accumulator is
+    for behavioral
+    end for;
+end cfg_accumulator_behavioral;
+
+configuration cfg_accumulator_structural of accumulator is
+    for structural
+    end for;
+end cfg_accumulator_structural;

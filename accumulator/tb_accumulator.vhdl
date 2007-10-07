@@ -97,5 +97,21 @@ begin
     finished <= true;
     wait;
 end process;
-
 end test;
+
+
+configuration tb_accumulator_behavioral of tb_accumulator is
+  for test
+      for all: accumulator
+          use configuration work.cfg_accumulator_behavioral;
+      end for;
+  end for;
+end tb_accumulator_behavioral;
+
+configuration tb_accumulator_structural of tb_accumulator is
+  for test
+      for all: accumulator
+          use configuration work.cfg_accumulator_structural;
+      end for;
+  end for;
+end tb_accumulator_structural;
