@@ -1,9 +1,9 @@
-library ieee; 
-use ieee.std_logic_1164.all; 
+library ieee;
+use ieee.std_logic_1164.all;
 
 entity mux41 is
     generic (N: integer := 8);
-    
+
     port (A, B, C, D: in  std_logic_vector (N-1 downto 0);
           SEL:  in  std_logic_vector(1 downto 0);
           O:    out std_logic_vector (N-1 downto 0) );

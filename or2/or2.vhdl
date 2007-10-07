@@ -35,16 +35,16 @@ end behavioral;
 
 
 configuration cfg_or2_logic of or2 is
-	for logic
-	end for;
+    for logic
+    end for;
 end cfg_or2_logic;
 
 configuration cfg_or2_logic_transport of or2 is
-	for logic_transport
-	end for;
+    for logic_transport
+    end for;
 end cfg_or2_logic_transport;
 
 configuration cfg_or2_behavioral of or2 is
-	for behavioral
-	end for;
+    for behavioral
+    end for;
 end cfg_or2_behavioral;

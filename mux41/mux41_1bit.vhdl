@@ -1,5 +1,5 @@
-library ieee; 
-use ieee.std_logic_1164.all; 
+library ieee;
+use ieee.std_logic_1164.all;
 
 entity mux41_1bit is
     port (A, B, C, D: in  std_logic;

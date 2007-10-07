@@ -1,5 +1,5 @@
-library ieee; 
-use ieee.std_logic_1164.all; 
+library ieee;
+use ieee.std_logic_1164.all;
 
 entity fa is
     generic (DELAY_S, DELAY_Co: time := 0 ns);
@@ -7,7 +7,7 @@ entity fa is
           Ci:   in  std_logic;
           S:    out std_logic;
           Co:   out std_logic);
-end fa; 
+end fa;
 
 architecture logic of fa is
 begin
@@ -51,12 +51,12 @@ begin
 end behavioral;
 
 
-configuration cfg_fa_logic of fa is	
+configuration cfg_fa_logic of fa is
     for logic
     end for;
 end cfg_fa_logic;
 
-configuration cfg_fa_behavioral of fa is	
+configuration cfg_fa_behavioral of fa is
     for behavioral
     end for;
 end cfg_fa_behavioral;

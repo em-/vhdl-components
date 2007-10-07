@@ -26,80 +26,80 @@ architecture test of tb_mac is
 
     signal clock_counter: integer := -1;
     signal finished: boolean := false;
-begin 
-	U: mac port map (CLK, RST, EN, A, B, ACCUMULATE, O);
-
-clock: process
 begin
-    CLK <= not CLK;
-    if finished then wait; end if;
-    wait for 0.5 ns;
-end process;
+    U: mac port map (CLK, RST, EN, A, B, ACCUMULATE, O);
 
-count: process(CLK)
-begin
-    if rising_edge(CLK) then
-        clock_counter <= clock_counter + 1;
-    end if;
-end process;
+    clock: process
+    begin
+        CLK <= not CLK;
+        if finished then wait; end if;
+        wait for 0.5 ns;
+    end process;
 
-test: process
-    variable testRST, testEN, testACCUMULATE: std_logic;
-    variable testA, testB: std_logic_vector(2 downto 0);
-    variable testO: std_logic_vector(5 downto 0);
-    file test_file: text is in "mac/tb_mac.test";
+    count: process(CLK)
+    begin
+        if rising_edge(CLK) then
+            clock_counter <= clock_counter + 1;
+        end if;
+    end process;
 
-    variable l: line;
-    variable t: integer;
-    variable good: boolean;
-    variable space: character;
-begin
-    wait on clock_counter;
+    test: process
+        variable testRST, testEN, testACCUMULATE: std_logic;
+        variable testA, testB: std_logic_vector(2 downto 0);
+        variable testO: std_logic_vector(5 downto 0);
+        file test_file: text is in "mac/tb_mac.test";
 
-    while not endfile(test_file) loop
-        readline(test_file, l);
+        variable l: line;
+        variable t: integer;
+        variable good: boolean;
+        variable space: character;
+    begin
+        wait on clock_counter;
 
-        -- read the time from the beginning of the line
-        -- skip the line if it doesn't start with an integer
-        read(l, t, good => good);
-        next when not good;
+        while not endfile(test_file) loop
+            readline(test_file, l);
 
-        read(l, space);
+            -- read the time from the beginning of the line
+            -- skip the line if it doesn't start with an integer
+            read(l, t, good => good);
+            next when not good;
 
-        read(l, testRST);
-        read(l, testEN);
-        read(l, testACCUMULATE);
+            read(l, space);
 
-        read(l, space);
+            read(l, testRST);
+            read(l, testEN);
+            read(l, testACCUMULATE);
 
-        read(l, testA);
+            read(l, space);
 
-        read(l, space);
+            read(l, testA);
 
-        read(l, testB);
+            read(l, space);
 
-        read(l, space);
+            read(l, testB);
 
-        read(l, testO);
+            read(l, space);
 
-        while clock_counter /= t loop
-            wait on clock_counter;
+            read(l, testO);
+
+            while clock_counter /= t loop
+                wait on clock_counter;
+            end loop;
+
+            RST <= testRST;
+            EN <= testEN;
+            ACCUMULATE <= testACCUMULATE;
+            A <= testA;
+            B <= testB;
+
+            wait for 1 ps;
+
+            assert O = testO report "Mismatch on output O";
         end loop;
 
-        RST <= testRST;
-        EN <= testEN;
-        ACCUMULATE <= testACCUMULATE;
-        A <= testA;
-        B <= testB;
-
-        wait for 1 ps;
-
-        assert O = testO report "Mismatch on output O";
-    end loop;
-
-    finished <= true;
-    wait;
-end process;
+        finished <= true;
+        wait;
+    end process;
 end test;
 
 

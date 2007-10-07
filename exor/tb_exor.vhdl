@@ -13,9 +13,9 @@ architecture test of tb_exor is
         port (A, B: in  std_logic;
               O:    out std_logic);
     end component;
-begin 
+begin
     uexor: exor
-    port map (inputA, inputB, output);
+        port map (inputA, inputB, output);
 
     inputA <= '0' after 1 ns, '1' after 2 ns,
               '0' after 10 ns, '1' after 12 ns,

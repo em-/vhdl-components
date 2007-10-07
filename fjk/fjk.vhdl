@@ -1,5 +1,5 @@
-library ieee; 
-use ieee.std_logic_1164.all; 
+library ieee;
+use ieee.std_logic_1164.all;
 
 entity fjk is
     port (CLK, RST: in  std_logic;
@@ -55,11 +55,11 @@ end behavioral_sync;
 
 
 configuration cfg_fjk_behavioral_async of fjk is
-	for behavioral_async
-	end for;
+    for behavioral_async
+    end for;
 end cfg_fjk_behavioral_async;
 
 configuration cfg_fjk_behavioral_sync of fjk is
-	for behavioral_sync
-	end for;
+    for behavioral_sync
+    end for;
 end cfg_fjk_behavioral_sync;

@@ -9,7 +9,7 @@ architecture test of tb_rca is
     constant N: integer := 4;
     signal A, B, S: std_logic_vector(N-1 downto 0);
     signal Ci, Co: std_logic;
-	
+
     component rca
         generic (N: integer);
         port (A, B: in  std_logic_vector (N-1 downto 0);
@@ -17,7 +17,7 @@ architecture test of tb_rca is
               S:    out std_logic_vector (N-1 downto 0);
               Co:   out std_logic);
     end component;
-begin 
+begin
     u: rca generic map (N) port map (A, B, Ci, S, Co);
 
     test: process

@@ -1,9 +1,9 @@
-library ieee; 
-use ieee.std_logic_1164.all; 
+library ieee;
+use ieee.std_logic_1164.all;
 
 entity latch is
     generic (N: integer := 8);
-    
+
     port (CLK, RST:  in  std_logic;
           EN:        in  std_logic;
           A:         in  std_logic_vector (N-1 downto 0);

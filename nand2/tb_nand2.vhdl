@@ -8,13 +8,13 @@ architecture test of tb_nand2 is
     signal input1: std_logic := '0';
     signal input2: std_logic := '0';
     signal output: std_logic;
-    
+
     component nand2
         generic (DELAY: time := 0 ns);
         port (A,B: in  std_logic;
               O:   out std_logic);
     end component;
-begin 
+begin
     Unand2: nand2
         generic map (DELAY => 0.2 ns)
         port map (input1, input2, output);

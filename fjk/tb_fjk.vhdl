@@ -24,64 +24,63 @@ architecture test of tb_fjk is
 begin
     U: fjk port map (CLK, RST, J, K, Q);
 
-clock: process
-begin
-    CLK <= not CLK;
-    if finished then wait; end if;
-    wait for 0.5 ns;
-end process;
+    clock: process
+    begin
+        CLK <= not CLK;
+        if finished then wait; end if;
+        wait for 0.5 ns;
+    end process;
 
-count: process(CLK)
-begin
-    if rising_edge(CLK) then
-        counter <= counter + 1;
-    end if;
-end process;
+    count: process(CLK)
+    begin
+        if rising_edge(CLK) then
+            counter <= counter + 1;
+        end if;
+    end process;
 
-test: process
-    variable testRST, testJ, testK, testQ: std_logic;
-    file test_file: text is in "fjk/tb_fjk.test";
+    test: process
+        variable testRST, testJ, testK, testQ: std_logic;
+        file test_file: text is in "fjk/tb_fjk.test";
 
-    variable l: line;
-    variable i: integer;
-    variable good: boolean;
-    variable space: character;
-begin
-    wait on counter;
+        variable l: line;
+        variable i: integer;
+        variable good: boolean;
+        variable space: character;
+    begin
+        wait on counter;
 
-    while not endfile(test_file) loop
-        readline(test_file, l);
+        while not endfile(test_file) loop
+            readline(test_file, l);
 
-        -- read the time from the beginning of the line
-        -- skip the line if it doesn't start with an integer
-        read(l, i, good => good);
-        next when not good;
+            -- read the time from the beginning of the line
+            -- skip the line if it doesn't start with an integer
+            read(l, i, good => good);
+            next when not good;
 
-        read(l, space);
+            read(l, space);
 
-        read(l, testRST);
-        read(l, testJ);
-        read(l, testK);
+            read(l, testRST);
+            read(l, testJ);
+            read(l, testK);
 
-        read(l, space);
+            read(l, space);
 
-        read(l, testQ);
+            read(l, testQ);
 
-        while counter /= i loop
-            wait on counter;
+            while counter /= i loop
+                wait on counter;
+            end loop;
+
+            RST <= testRST;
+            J <= testJ;
+            K <= testK;
+
+            assert Q = testQ report "Mismatch on output Q";
         end loop;
 
-        RST <= testRST;
-        J <= testJ;
-        K <= testK;
-
-        assert Q = testQ report "Mismatch on output Q";
-    end loop;
-
-    finished <= true;
-    wait;
-end process;
-
+        finished <= true;
+        wait;
+    end process;
 end test;
 
 configuration tb_fjk_behavioral_async of tb_fjk is

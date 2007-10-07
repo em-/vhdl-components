@@ -18,7 +18,7 @@ architecture test of tb_or2 is
         port (A, B: in  std_logic;
               O:    out std_logic);
     end component;
-begin 
+begin
     U: or2
         generic map (DELAY => 0.2 ns)
         port map (A, B, O);

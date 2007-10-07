@@ -13,53 +13,51 @@ architecture test of tb_or3 is
     signal B: std_logic := '0';
     signal C: std_logic := '0';
     signal O: std_logic;
-	
-	component or3 port (
+
+    component or3 port (
         A, B, C: in std_logic;
         O: out std_logic);
-	end component;
-
-begin 
-	U: or3 port map (A, B, C, O);
-
-test: process
-    variable testA, testB, testC, testO: std_logic;
-    file test_file: text is in "or3/tb_or3.test";
-
-    variable l: line;
-    variable t: time;
-    variable i: integer;
-    variable good: boolean;
-    variable space: character;
+    end component;
 begin
-    while not endfile(test_file) loop
-        readline(test_file, l);
+    U: or3 port map (A, B, C, O);
 
-        -- read the time from the beginning of the line
-        -- skip the line if it doesn't start with an integer
-        read(l, i, good => good);
-        next when not good;
+    test: process
+        variable testA, testB, testC, testO: std_logic;
+        file test_file: text is in "or3/tb_or3.test";
 
-        read(l, space); -- skip a space
+        variable l: line;
+        variable t: time;
+        variable i: integer;
+        variable good: boolean;
+        variable space: character;
+    begin
+        while not endfile(test_file) loop
+            readline(test_file, l);
 
-        read(l, testA);  -- read A value
-        read(l, testB);  -- read B value
-        read(l, testC);  -- read C value
-        read(l, testO);  -- read O value
+            -- read the time from the beginning of the line
+            -- skip the line if it doesn't start with an integer
+            read(l, i, good => good);
+            next when not good;
 
-        A <= testA;
-        B <= testB;
-        C <= testC;
+            read(l, space); -- skip a space
 
-        t := i * 1 ns;  -- convert an integer to time
-        if (now < t) then
-            wait for t - now;
-        end if;
-        
-        assert O = testO report "Mismatch on output O";
-    end loop;
+            read(l, testA);  -- read A value
+            read(l, testB);  -- read B value
+            read(l, testC);  -- read C value
+            read(l, testO);  -- read O value
 
-    wait;
-end process;
+            A <= testA;
+            B <= testB;
+            C <= testC;
 
+            t := i * 1 ns;  -- convert an integer to time
+            if (now < t) then
+                wait for t - now;
+            end if;
+
+            assert O = testO report "Mismatch on output O";
+        end loop;
+
+        wait;
+    end process;
 end test;

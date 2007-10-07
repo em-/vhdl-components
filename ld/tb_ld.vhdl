@@ -24,60 +24,59 @@ architecture test of tb_ld is
 begin
     U: ld port map (CLK, RST, D, Q);
 
-clock: process
-begin
-    CLK <= not CLK;
-    if finished then wait; end if;
-    wait for 0.5 ns;
-end process;
+    clock: process
+    begin
+        CLK <= not CLK;
+        if finished then wait; end if;
+        wait for 0.5 ns;
+    end process;
 
-count: process(CLK)
-begin
-    if rising_edge(CLK) then
-        counter <= counter + 1;
-    end if;
-end process;
+    count: process(CLK)
+    begin
+        if rising_edge(CLK) then
+            counter <= counter + 1;
+        end if;
+    end process;
 
-test: process
-    variable testRST, testD, testQ: std_logic;
-    file test_file: text is in "ld/tb_ld.test";
+    test: process
+        variable testRST, testD, testQ: std_logic;
+        file test_file: text is in "ld/tb_ld.test";
 
-    variable l: line;
-    variable t: integer;
-    variable good: boolean;
-    variable space: character;
-begin
-    wait on counter;
+        variable l: line;
+        variable t: integer;
+        variable good: boolean;
+        variable space: character;
+    begin
+        wait on counter;
 
-    while not endfile(test_file) loop
-        readline(test_file, l);
+        while not endfile(test_file) loop
+            readline(test_file, l);
 
-        -- read the time from the beginning of the line
-        -- skip the line if it doesn't start with an integer
-        read(l, t, good => good);
-        next when not good;
+            -- read the time from the beginning of the line
+            -- skip the line if it doesn't start with an integer
+            read(l, t, good => good);
+            next when not good;
 
-        read(l, space);
+            read(l, space);
 
-        read(l, testRST);
-        read(l, testD);
+            read(l, testRST);
+            read(l, testD);
 
-        read(l, space);
+            read(l, space);
 
-        read(l, testQ);
+            read(l, testQ);
 
-        while counter /= t loop
-            wait on counter;
+            while counter /= t loop
+                wait on counter;
+            end loop;
+
+            RST <= testRST;
+            D <= testD;
+
+            assert Q = testQ report "Mismatch on output Q";
         end loop;
 
-        RST <= testRST;
-        D <= testD;
-
-        assert Q = testQ report "Mismatch on output Q";
-    end loop;
-
-    finished <= true;
-    wait;
-end process;
-
+        finished <= true;
+        wait;
+    end process;
 end test;

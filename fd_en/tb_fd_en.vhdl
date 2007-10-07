@@ -13,74 +13,73 @@ architecture test of tb_fd_en is
     signal EN, D: std_logic;
     signal Q: std_logic;
     signal counter: integer := -1;
-	
-	component fd_en port (
+
+    component fd_en port (
         CLK, RST: in  std_logic;
         EN:       in  std_logic;
         D:        in  std_logic;
         Q:        out std_logic);
-	end component;
+    end component;
 
     signal finished: boolean := false;
-begin 
-	U: fd_en port map (CLK, RST, EN, D, Q);
-
-clock: process
 begin
-    CLK <= not CLK;
-    if finished then wait; end if;
-    wait for 0.5 ns;
-end process;
+    U: fd_en port map (CLK, RST, EN, D, Q);
 
-count: process(CLK)
-begin
-    if rising_edge(CLK) then
-        counter <= counter + 1;
-    end if;
-end process;
+    clock: process
+    begin
+        CLK <= not CLK;
+        if finished then wait; end if;
+        wait for 0.5 ns;
+    end process;
 
-test: process
-    variable testRST, testEN, testD, testQ: std_logic;
-    file test_file: text is in "fd_en/tb_fd_en.test";
+    count: process(CLK)
+    begin
+        if rising_edge(CLK) then
+            counter <= counter + 1;
+        end if;
+    end process;
 
-    variable l: line;
-    variable t: integer;
-    variable good: boolean;
-    variable space: character;
-begin
-    wait on counter;
+    test: process
+        variable testRST, testEN, testD, testQ: std_logic;
+        file test_file: text is in "fd_en/tb_fd_en.test";
 
-    while not endfile(test_file) loop
-        readline(test_file, l);
+        variable l: line;
+        variable t: integer;
+        variable good: boolean;
+        variable space: character;
+    begin
+        wait on counter;
 
-        -- read the time from the beginning of the line
-        -- skip the line if it doesn't start with an integer
-        read(l, t, good => good);
-        next when not good;
+        while not endfile(test_file) loop
+            readline(test_file, l);
 
-        read(l, space);
+            -- read the time from the beginning of the line
+            -- skip the line if it doesn't start with an integer
+            read(l, t, good => good);
+            next when not good;
 
-        read(l, testRST);
-        read(l, testEN);
-        read(l, testD);
+            read(l, space);
 
-        read(l, space);
+            read(l, testRST);
+            read(l, testEN);
+            read(l, testD);
 
-        read(l, testQ);
+            read(l, space);
 
-        while counter /= t loop
-            wait on counter;
+            read(l, testQ);
+
+            while counter /= t loop
+                wait on counter;
+            end loop;
+
+            RST <= testRST;
+            EN <= testEN;
+            D <= testD;
+
+            assert Q = testQ report "Mismatch on output Q";
         end loop;
 
-        RST <= testRST;
-        EN <= testEN;
-        D <= testD;
-
-        assert Q = testQ report "Mismatch on output Q";
-    end loop;
-
-    finished <= true;
-    wait;
-end process;
-
+        finished <= true;
+        wait;
+    end process;
 end test;

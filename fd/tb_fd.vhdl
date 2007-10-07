@@ -21,7 +21,7 @@ architecture test of tb_fd is
     end component;
 
     signal finished: boolean := false;
-begin 
+begin
     U: fd port map (CLK, RST, D, Q);
 
     clock: process

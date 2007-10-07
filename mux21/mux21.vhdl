@@ -1,9 +1,9 @@
-library ieee; 
-use ieee.std_logic_1164.all; 
+library ieee;
+use ieee.std_logic_1164.all;
 
 entity mux21 is
     generic (N: integer := 8);
-    
+
     port (A, B: in  std_logic_vector (N-1 downto 0);
           SEL:  in  std_logic;
           O:    out std_logic_vector (N-1 downto 0) );
@@ -28,7 +28,7 @@ architecture structural of mux21 is
               O:    out std_logic);
     end component;
 begin
-    mux_vect: for i in 0 to N-1 
+    mux_vect: for i in 0 to N-1
     generate
         mux_i: mux21_1bit port map (A(i), B(i), SEL, O(i));
     end generate;

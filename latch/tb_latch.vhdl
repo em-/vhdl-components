@@ -13,80 +13,79 @@ architecture test of tb_latch is
     signal EN: std_logic;
     signal A, O: std_logic_vector(2 downto 0);
     signal counter: integer := -1;
-	
-	component latch 
+
+    component latch
         generic (N: integer := 3);
         port (
             CLK, RST: in  std_logic;
             EN:       in  std_logic;
             A:        in  std_logic_vector(N-1 downto 0);
             O:        out std_logic_vector(N-1 downto 0));
-	end component;
+    end component;
 
     signal finished: boolean := false;
-begin 
-	U: latch port map (CLK, RST, EN, A, O);
-
-clock: process
 begin
-    CLK <= not CLK;
-    if finished then wait; end if;
-    wait for 0.5 ns;
-end process;
+    U: latch port map (CLK, RST, EN, A, O);
 
-count: process(CLK)
-begin
-    if rising_edge(CLK) then
-        counter <= counter + 1;
-    end if;
-end process;
+    clock: process
+    begin
+        CLK <= not CLK;
+        if finished then wait; end if;
+        wait for 0.5 ns;
+    end process;
 
-test: process
-    variable testRST, testEN: std_logic;
-    variable testA, testO: std_logic_vector(2 downto 0);
-    file test_file: text is in "latch/tb_latch.test";
+    count: process(CLK)
+    begin
+        if rising_edge(CLK) then
+            counter <= counter + 1;
+        end if;
+    end process;
 
-    variable l: line;
-    variable t: integer;
-    variable good: boolean;
-    variable space: character;
-begin
-    wait on counter;
+    test: process
+        variable testRST, testEN: std_logic;
+        variable testA, testO: std_logic_vector(2 downto 0);
+        file test_file: text is in "latch/tb_latch.test";
 
-    while not endfile(test_file) loop
-        readline(test_file, l);
+        variable l: line;
+        variable t: integer;
+        variable good: boolean;
+        variable space: character;
+    begin
+        wait on counter;
 
-        -- read the time from the beginning of the line
-        -- skip the line if it doesn't start with an integer
-        read(l, t, good => good);
-        next when not good;
+        while not endfile(test_file) loop
+            readline(test_file, l);
 
-        read(l, space);
+            -- read the time from the beginning of the line
+            -- skip the line if it doesn't start with an integer
+            read(l, t, good => good);
+            next when not good;
 
-        read(l, testRST);
-        read(l, testEN);
+            read(l, space);
 
-        read(l, space);
+            read(l, testRST);
+            read(l, testEN);
 
-        read(l, testA);
+            read(l, space);
 
-        read(l, space);
+            read(l, testA);
 
-        read(l, testO);
+            read(l, space);
 
-        while counter /= t loop
-            wait on counter;
+            read(l, testO);
+
+            while counter /= t loop
+                wait on counter;
+            end loop;
+
+            RST <= testRST;
+            EN <= testEN;
+            A <= testA;
+
+            assert O = testO report "Mismatch on output O";
         end loop;
 
-        RST <= testRST;
-        EN <= testEN;
-        A <= testA;
-
-        assert O = testO report "Mismatch on output O";
-    end loop;
-
-    finished <= true;
-    wait;
-end process;
-
+        finished <= true;
+        wait;
+    end process;
 end test;

@@ -1,5 +1,5 @@
-library ieee; 
-use ieee.std_logic_1164.all; 
+library ieee;
+use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity multiplier is
@@ -13,7 +13,6 @@ architecture behavioral of multiplier is
 begin
     O <= std_logic_vector(unsigned(unsigned(A) * unsigned(B)));
 end behavioral;
-
 
 architecture structural of multiplier is
     component fa
@@ -61,6 +60,7 @@ begin
     O(2*N-2 downto N-1) <= S(N-1);
     O(2*N-1) <= C(N-1)(N-1);
 end structural;
+
 
 configuration cfg_multiplier_behavioral of multiplier is
     for behavioral
