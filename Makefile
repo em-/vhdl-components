@@ -44,7 +44,9 @@ TESTBENCHES=tb_or2_logic		\
 	    tb_counter_behavioral	\
 	    tb_counter_structural	\
 	    tb_accumulator_behavioral	\
-	    tb_accumulator_structural
+	    tb_accumulator_structural	\
+	    tb_mac_behavioral	\
+	    tb_mac_structural
 
 # Default target
 all: run
@@ -108,6 +110,9 @@ tb_counter.o: counter.o
 tb_accumulator_behavioral: tb_accumulator.o
 tb_accumulator_structural: tb_accumulator.o
 tb_accumulator.o: accumulator.o
+tb_mac_behavioral: tb_mac.o
+tb_mac_structural: tb_mac.o
+tb_mac.o: mac.o
 
 comparator.o: fa.o
 rca.o: fa.o
@@ -116,6 +121,7 @@ reg.o: fd_en.o
 latch.o: ld_en.o
 counter.o: ha.o fd_en.o
 accumulator.o: mux21.o rca.o reg.o
+mac.o: mux21.o multiplier.o reg.o
 mux21.o: mux21_1bit.o
 
 # Elaboration target
