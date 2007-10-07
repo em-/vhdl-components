@@ -9,14 +9,16 @@ entity tb_accumulator is
 end tb_accumulator;
 
 architecture test of tb_accumulator is
-    signal CLK, RST: std_logic := '0';
-    signal EN: std_logic;
-    signal A, B:       std_logic_vector (2 downto 0);
+    constant N:        integer := 3;
+
+    signal CLK, RST:   std_logic := '0';
+    signal EN:         std_logic;
+    signal A, B:       std_logic_vector (N-1 downto 0);
     signal ACCUMULATE: std_logic;
-    signal O:          std_logic_vector (2 downto 0);
+    signal O:          std_logic_vector (N-1 downto 0);
 
     component accumulator
-        generic (N: integer := 3);
+        generic (N: integer);
         port (CLK, RST:   in  std_logic;
               EN:         in  std_logic;
               A, B:       in  std_logic_vector (N-1 downto 0);
@@ -27,7 +29,9 @@ architecture test of tb_accumulator is
     signal clock_counter: integer := -1;
     signal finished: boolean := false;
 begin
-    U: accumulator port map (CLK, RST, EN, A, B, ACCUMULATE, O);
+    U: accumulator
+        generic map (N)
+        port map (CLK, RST, EN, A, B, ACCUMULATE, O);
 
     clock: process
     begin
@@ -45,7 +49,7 @@ begin
 
     test: process
         variable testRST, testEN, testACCUMULATE: std_logic;
-        variable testA, testB, testO: std_logic_vector(2 downto 0);
+        variable testA, testB, testO: std_logic_vector(N-1 downto 0);
         file test_file: text is in "accumulator/tb_accumulator.test";
 
         variable l: line;
