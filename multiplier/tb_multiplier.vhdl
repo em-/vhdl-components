@@ -53,3 +53,11 @@ configuration tb_multiplier_behavioral of tb_multiplier is
       end for;
    end for;
 end tb_multiplier_behavioral;
+
+configuration tb_multiplier_structural of tb_multiplier is
+   for test
+      for all: multiplier
+         use configuration work.cfg_multiplier_structural;
+      end for;
+   end for;
+end tb_multiplier_structural;

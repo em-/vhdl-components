@@ -27,6 +27,7 @@ TESTBENCHES=tb_or2_logic		\
 	    tb_mux41_1bit		\
 	    tb_comparator		\
 	    tb_multiplier_behavioral	\
+	    tb_multiplier_structural	\
 	    tb_fd_en			\
 	    tb_fd_behavioral_async	\
 	    tb_fd_behavioral_sync	\
@@ -77,6 +78,7 @@ tb_mux41: mux41.o tb_mux41.o
 tb_mux41_1bit: mux41_1bit.o tb_mux41_1bit.o
 tb_comparator: comparator.o tb_comparator.o
 tb_multiplier_behavioral: tb_multiplier.o
+tb_multiplier_structural: tb_multiplier.o
 tb_multiplier.o: multiplier.o
 tb_rca_structural: tb_rca.o
 tb_rca_behavioral: tb_rca.o
@@ -103,6 +105,7 @@ tb_accumulator: accumulator.o tb_accumulator.o
 
 comparator.o: fa.o
 rca.o: fa.o
+multiplier.o: and2.o ha.o fa.o
 reg.o: fd_en.o
 latch.o: ld_en.o
 counter.o: ha.o fd_en.o
