@@ -90,5 +90,21 @@ begin
     finished <= true;
     wait;
 end process;
-
 end test;
+
+
+configuration tb_counter_behavioral of tb_counter is
+  for test
+      for all: counter
+          use configuration work.cfg_counter_behavioral;
+      end for;
+  end for;
+end tb_counter_behavioral;
+
+configuration tb_counter_structural of tb_counter is
+  for test
+      for all: counter
+          use configuration work.cfg_counter_structural;
+      end for;
+  end for;
+end tb_counter_structural;

@@ -1,5 +1,6 @@
 library ieee; 
 use ieee.std_logic_1164.all; 
+use ieee.numeric_std.all;
 
 entity counter is
     generic (N: integer := 8);
@@ -9,6 +10,23 @@ entity counter is
           OWFL:     out   std_logic
     );
 end counter;
+
+architecture behavioral of counter is
+begin
+    process (RST, CLK)
+    begin
+        if RST = '0' then
+            S <= (others => '0');
+            OWFL <= '0';
+        elsif CLK'event and CLK = '1' and EN = '0' then
+            OWFL <= '0';
+            if S = (S'Range => '1') then
+                OWFL <= '1';
+            end if;
+            S <= std_logic_vector(unsigned(S)+1);
+        end if;
+    end process;
+end behavioral;
 
 architecture structural of counter is
     component ha
@@ -35,3 +53,14 @@ begin
         fd_en_i: fd_en port map (CLK, RST, EN, sum(i), S(i));
     end generate;
 end structural;
+
+
+configuration cfg_counter_behavioral of counter is
+    for behavioral
+    end for;
+end cfg_counter_behavioral;
+
+configuration cfg_counter_structural of counter is
+    for structural
+    end for;
+end cfg_counter_structural;
