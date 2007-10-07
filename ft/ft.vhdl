@@ -19,7 +19,7 @@ process (CLK, RST)
 begin
     if RST = '0' then
         d := '0';
-    elsif CLK'event and CLK = '1' then
+    elsif rising_edge(CLK) then
         if T = '1' then
             d := not d;
         else
@@ -36,7 +36,7 @@ begin
 process (CLK, RST)
     variable d: std_logic;
 begin
-    if CLK'event and CLK = '1' then
+    if rising_edge(CLK) then
         if RST = '0' then
             d := '0';
         elsif T = '1' then

@@ -16,7 +16,7 @@ process (RST, CLK)
 begin
     if RST = '0' then
         O <= (O'range => '0');
-    elsif CLK'event and CLK = '1' then
+    elsif rising_edge(CLK) then
         if EN = '0' then
             O <= A;
         end if;

@@ -27,7 +27,7 @@ begin
         if RST = '1' then
             OUT1 <= (others => '0');
             OUT2 <= (others => '0');
-        elsif CLK'event and CLK = '1' and EN = '1' then
+        elsif rising_edge(CLK) and EN = '1' then
             if RD1 = '1' then
                 OUT1 <= REGISTERS(to_integer(unsigned(ADDR_RD1)));
             end if;

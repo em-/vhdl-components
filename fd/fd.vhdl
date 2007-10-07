@@ -13,7 +13,7 @@ process (CLK, RST)
 begin
     if RST = '1' then
         Q <= '0';
-    elsif CLK'event and CLK = '1' then
+    elsif rising_edge(CLK) then
         Q <= D;
     end if;
 end process;
@@ -23,7 +23,7 @@ architecture behavioral_sync of fd is
 begin
 process (CLK)
 begin
-    if CLK'event and CLK = '1' then
+    if rising_edge(CLK) then
         if RST = '1' then
             Q <= '0';
         else

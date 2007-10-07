@@ -16,7 +16,7 @@ begin
     begin
         if RST='1' then
             current_state <= S;
-        elsif CLK'event and CLK='1' then
+        elsif rising_edge(CLK) then
             current_state <= next_state;
         end if;
     end process;

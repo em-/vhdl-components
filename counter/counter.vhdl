@@ -18,7 +18,7 @@ begin
         if RST = '0' then
             S <= (others => '0');
             OWFL <= '0';
-        elsif CLK'event and CLK = '1' and EN = '0' then
+        elsif rising_edge(CLK) and EN = '0' then
             OWFL <= '0';
             if S = (S'Range => '1') then
                 OWFL <= '1';

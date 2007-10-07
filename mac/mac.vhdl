@@ -18,7 +18,7 @@ begin
     begin
         if RST = '0' then
             feedback := (others => '0');
-        elsif CLK = '1' and CLK'event and EN = '0' then
+        elsif rising_edge(CLK) and EN = '0' then
             if ACCUMULATE = '0' then
                 feedback := unsigned(A) * unsigned(B);
             else
