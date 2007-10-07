@@ -4,11 +4,11 @@ use ieee.numeric_std.all;
 
 entity accumulator is
     generic (N: integer := 8);
-    port (CLK, RST:   in    std_logic;
-          EN:         in    std_logic;
-          A, B:       in    std_logic_vector (N-1 downto 0);
-          ACCUMULATE: in    std_logic;
-          O:          inout std_logic_vector (N-1 downto 0));
+    port (CLK, RST:   in  std_logic;
+          EN:         in  std_logic;
+          A, B:       in  std_logic_vector (N-1 downto 0);
+          ACCUMULATE: in  std_logic;
+          O:          out std_logic_vector (N-1 downto 0));
 end accumulator;
 
 architecture behavioral of accumulator is
@@ -33,6 +33,7 @@ end behavioral;
 architecture structural of accumulator is
     signal OUT_MUX:  std_logic_vector (N-1 downto 0);
     signal OUT_ADD:  std_logic_vector (N-1 downto 0);
+    signal OUT_REG:  std_logic_vector (N-1 downto 0);
 
     component mux21
         generic (N: integer := 8);
@@ -57,9 +58,11 @@ architecture structural of accumulator is
               O:         out std_logic_vector (N-1 downto 0));
     end component;
 begin
+    O <= OUT_REG after 0 ns;
+
     input: mux21
             generic map (N)
-            port map (B, O, ACCUMULATE, OUT_MUX);
+            port map (B, OUT_REG, ACCUMULATE, OUT_MUX);
 
     adder: rca
             generic map (N => N)
@@ -67,7 +70,7 @@ begin
 
     data: reg
             generic map (N)
-            port map (CLK, RST, EN, OUT_ADD, O);
+            port map (CLK, RST, EN, OUT_ADD, OUT_REG);
 end structural;
 
 
