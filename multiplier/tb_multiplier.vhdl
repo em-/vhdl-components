@@ -19,12 +19,10 @@ begin
     u: multiplier port map (A, B, O);
 
     process
-        variable i, j: integer;
+        variable max: integer := 2**N - 1;
     begin
-        i := 0;
-        while i < (2**(A'Length)) loop
-            j := 0;
-            while j < (2**(B'Length)) loop
+        for i in 0 to max loop
+            for j in 0 to max loop
                 A <= std_logic_vector(to_unsigned(i, A'Length));
                 B <= std_logic_vector(to_unsigned(j, B'Length));
                 wait for 1 ns;
@@ -37,9 +35,7 @@ begin
                     report "expected " & integer'Image(i) & "*" & integer'Image(j) &
                            "=" & integer'Image(i*j) &
                            " got " & integer'Image(to_integer(unsigned(O)));
-                j := j + 1;
             end loop;
-            i := i + 1;
         end loop;
         wait;
     end process;
