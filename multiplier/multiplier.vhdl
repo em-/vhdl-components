@@ -55,7 +55,7 @@ begin
     end generate;
 
     fa03: fa
-    port map (C(i-1)(3), tAND(i)(3), C(i)(2), S(i)(3), C(i)(3));
+    port map (C(i-1)(N-1), tAND(i)(N-1), C(i)(N-2), S(i)(N-1), C(i)(N-1));
     end generate;
 
     O(2*N-2 downto N-1) <= S(N-1);
