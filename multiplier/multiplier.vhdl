@@ -43,38 +43,18 @@ begin
     S(0) <= tAND(0);
     C(0) <= (others => '0');
 
-    O(0) <= S(0)(0);
+    row: for i in 1 to N-1 generate
+    O(i-1) <= S(i-1)(0);
 
     ha00: ha
-    port map (S(0)(1), tAND(1)(0), S(1)(0), C(1)(0));
+    port map (S(i-1)(1), tAND(i)(0), S(i)(0), C(i)(0));
     fa01: fa
-    port map (S(0)(2), tAND(1)(1), C(1)(0), S(1)(1), C(1)(1));
+    port map (S(i-1)(2), tAND(i)(1), C(i)(0), S(i)(1), C(i)(1));
     fa02: fa
-    port map (S(0)(3), tAND(1)(2), C(1)(1), S(1)(2), C(1)(2));
+    port map (S(i-1)(3), tAND(i)(2), C(i)(1), S(i)(2), C(i)(2));
     fa03: fa
-    port map (C(0)(3), tAND(1)(3), C(1)(2), S(1)(3), C(1)(3));
-
-    O(1) <= S(1)(0);
-
-    ha10: ha
-    port map (S(1)(1), tAND(2)(0), S(2)(0), C(2)(0));
-    fa11: fa
-    port map (S(1)(2), tAND(2)(1), C(2)(0), S(2)(1), C(2)(1));
-    fa12: fa
-    port map (S(1)(3), tAND(2)(2), C(2)(1), S(2)(2), C(2)(2));
-    fa13: fa
-    port map (C(1)(3), tAND(2)(3), C(2)(2), S(2)(3), C(2)(3));
-
-    O(2) <= S(2)(0);
-
-    ha20: ha
-    port map (S(2)(1), tAND(3)(0), S(3)(0), C(3)(0));
-    fa21: fa
-    port map (S(2)(2), tAND(3)(1), C(3)(0), S(3)(1), C(3)(1));
-    fa22: fa
-    port map (S(2)(3), tAND(3)(2), C(3)(1), S(3)(2), C(3)(2));
-    fa23: fa
-    port map (C(2)(3), tAND(3)(3), C(3)(2), S(3)(3), C(3)(3));
+    port map (C(i-1)(3), tAND(i)(3), C(i)(2), S(i)(3), C(i)(3));
+    end generate;
 
     O(6 downto 3) <= S(3);
     O(7) <= C(3)(3);
