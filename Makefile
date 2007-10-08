@@ -28,6 +28,7 @@ TESTBENCHES=tb_or2_logic		\
 	    tb_comparator		\
 	    tb_multiplier_behavioral	\
 	    tb_multiplier_structural	\
+	    tb_alu_behavioral		\
 	    tb_fd_en			\
 	    tb_fd_behavioral_async	\
 	    tb_fd_behavioral_sync	\
@@ -85,6 +86,9 @@ tb_comparator: comparator.o tb_comparator.o
 tb_multiplier_behavioral: tb_multiplier.o
 tb_multiplier_structural: tb_multiplier.o
 tb_multiplier.o: multiplier.o
+tb_alu_behavioral: tb_alu.o
+tb_alu.o: alu.o
+alu.o: alu_operations.o
 tb_rca_structural: tb_rca.o
 tb_rca_behavioral: tb_rca.o
 tb_rca.o: rca.o
