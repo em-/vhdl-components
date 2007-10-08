@@ -3,7 +3,6 @@ library ieee;
 
 use std.textio.all;
 use ieee.std_logic_1164.all;
-use ieee.std_logic_textio.all; -- synopsys only
 
 entity tb_or2 is
 end tb_or2;
