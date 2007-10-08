@@ -53,6 +53,8 @@ begin
                 else
                     next_state <= S;
                 end if;
+            when others =>
+                next_state <= S;
         end case;
     end process;
 end behavioral;

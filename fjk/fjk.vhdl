@@ -24,6 +24,7 @@ begin
                 Q <= '0';
             when "11" =>
                 Q <= 'X';
+            when others => null;
         end case;
     end if;
 end process;

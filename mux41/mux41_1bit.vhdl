@@ -16,6 +16,7 @@ begin
         when "01" => O <= B;
         when "10" => O <= C;
         when "11" => O <= D;
+        when others => null;
     end case;
 end process;
 end behavioral;

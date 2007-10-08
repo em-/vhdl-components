@@ -46,6 +46,7 @@ begin
             when "111" =>
                 S  <= '1' after DELAY_S;
                 Co <= '1' after DELAY_Co;
+            when others  => null;
         end case;
     end process;
 end behavioral;
