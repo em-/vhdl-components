@@ -67,9 +67,7 @@ begin
 
             read(l, testQ);
 
-            while counter /= i loop
-                wait on counter;
-            end loop;
+            wait on counter until counter = i;
 
             RST <= testRST;
             J <= testJ;

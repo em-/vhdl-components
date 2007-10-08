@@ -74,9 +74,7 @@ begin
 
             read(l, testO);
 
-            while counter /= t loop
-                wait on counter;
-            end loop;
+            wait on counter until counter = t;
 
             RST <= testRST;
             EN <= testEN;
