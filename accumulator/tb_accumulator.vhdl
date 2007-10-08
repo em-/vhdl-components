@@ -80,9 +80,7 @@ begin
             read(l, testB);
             read(l, testO);
 
-            while clock_counter /= t loop
-                wait on clock_counter;
-            end loop;
+            wait on clock_counter until clock_counter = t;
 
             RST <= testRST;
             EN <= testEN;
