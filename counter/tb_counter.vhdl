@@ -51,7 +51,6 @@ begin
         variable l: line;
         variable t: integer;
         variable good: boolean;
-        variable space: character;
     begin
         wait on clock_counter;
 
@@ -63,17 +62,10 @@ begin
             read(l, t, good => good);
             next when not good;
 
-            read(l, space);
-
             read(l, testRST);
             read(l, testEN);
 
-            read(l, space);
-
             read(l, testS);
-
-            read(l, space);
-
             read(l, testOWFL);
 
             while clock_counter /= t loop

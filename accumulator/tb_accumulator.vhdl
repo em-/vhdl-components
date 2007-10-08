@@ -61,7 +61,6 @@ begin
         variable l: line;
         variable t: integer;
         variable good: boolean;
-        variable space: character;
     begin
         wait on clock_counter;
 

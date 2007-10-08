@@ -45,7 +45,6 @@ begin
         variable l: line;
         variable t: integer;
         variable good: boolean;
-        variable space: character;
     begin
         wait on counter;
 
@@ -57,12 +56,8 @@ begin
             read(l, t, good => good);
             next when not good;
 
-            read(l, space);
-
             read(l, testRST);
             read(l, testD);
-
-            read(l, space);
 
             read(l, testQ);
 

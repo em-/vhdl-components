@@ -31,7 +31,6 @@ begin
         variable t: time;
         variable i: integer;
         variable good: boolean;
-        variable space: character;
     begin
         while not endfile(test_file) loop
             readline(test_file, l);
@@ -40,8 +39,6 @@ begin
             -- skip the line if it doesn't start with an integer
             read(l, i, good => good);
             next when not good;
-
-            read(l, space); -- skip a space
 
             read(l, testA);
             read(l, testB);

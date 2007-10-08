@@ -32,7 +32,6 @@ begin
         variable t: time;
         variable i: integer;
         variable good: boolean;
-        variable space: character;
     begin
         while not endfile(test_file) loop
             readline(test_file, l);
@@ -42,16 +41,9 @@ begin
             read(l, i, good => good);
             next when not good;
 
-            read(l, space);
-
             read(l, testA);
-            read(l, space);
-
             read(l, testB);
-            read(l, space);
-
             read(l, testSEL);
-            read(l, space);
 
             read(l, testO);
 
