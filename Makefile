@@ -46,7 +46,7 @@ TESTBENCHES=tb_or2_logic		\
 	    tb_counter_structural	\
 	    tb_accumulator_behavioral	\
 	    tb_accumulator_structural	\
-	    tb_mac_behavioral	\
+	    tb_mac_behavioral		\
 	    tb_mac_structural
 
 # Default target
