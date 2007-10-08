@@ -9,15 +9,17 @@ entity tb_mac is
 end tb_mac;
 
 architecture test of tb_mac is
-    signal CLK, RST: std_logic := '0';
-    signal EN: std_logic;
-    signal A, B:       std_logic_vector (2 downto 0);
+    constant N:        integer := 3;
+
+    signal CLK, RST:   std_logic := '0';
+    signal EN:         std_logic;
+    signal A, B:       std_logic_vector (N-1 downto 0);
     signal ACCUMULATE: std_logic;
-    signal O:          std_logic_vector (5 downto 0);
-    signal referenceO: std_logic_vector (5 downto 0);
+    signal O:          std_logic_vector (2*N-1 downto 0);
+    signal referenceO: std_logic_vector (O'Range);
 
     component mac
-        generic (N: integer := 3);
+        generic (N: integer);
         port (CLK, RST:   in  std_logic;
               EN:         in  std_logic;
               A, B:       in  std_logic_vector (N-1 downto 0);
@@ -28,7 +30,9 @@ architecture test of tb_mac is
     signal clock_counter: integer := -1;
     signal finished: boolean := false;
 begin
-    U: mac port map (CLK, RST, EN, A, B, ACCUMULATE, O);
+    U: mac
+        generic map (N)
+        port map (CLK, RST, EN, A, B, ACCUMULATE, O);
 
     clock: process
     begin
@@ -51,8 +55,8 @@ begin
 
     test: process
         variable testRST, testEN, testACCUMULATE: std_logic;
-        variable testA, testB: std_logic_vector(2 downto 0);
-        variable testO: std_logic_vector(5 downto 0);
+        variable testA, testB: std_logic_vector(A'Range);
+        variable testO: std_logic_vector(O'Range);
         file test_file: text is in "mac/tb_mac.test";
 
         variable l: line;
