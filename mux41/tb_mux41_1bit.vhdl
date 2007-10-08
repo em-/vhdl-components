@@ -26,8 +26,7 @@ begin
         file test_file: text is in "mux41/tb_mux41_1bit.test";
 
         variable l: line;
-        variable t: time;
-        variable i: integer;
+        variable t: integer;
         variable good: boolean;
     begin
         while not endfile(test_file) loop
@@ -35,7 +34,7 @@ begin
 
             -- read the time from the beginning of the line
             -- skip the line if it doesn't start with an integer
-            read(l, i, good => good);
+            read(l, t, good => good);
             next when not good;
 
             read(l, testA);
@@ -53,10 +52,7 @@ begin
             D <= testD;
             SEL <= testSEL;
 
-            t := i * 1 ns;  -- convert an integer to time
-            if (now < t) then
-                wait for t - now;
-            end if;
+            wait for t * 1 ns - now;
 
             assert O = testO report "Mismatch on output O";
         end loop;
