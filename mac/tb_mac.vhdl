@@ -14,6 +14,7 @@ architecture test of tb_mac is
     signal A, B:       std_logic_vector (2 downto 0);
     signal ACCUMULATE: std_logic;
     signal O:          std_logic_vector (5 downto 0);
+    signal referenceO: std_logic_vector (5 downto 0);
 
     component mac
         generic (N: integer := 3);
@@ -41,6 +42,11 @@ begin
         if rising_edge(CLK) then
             clock_counter <= clock_counter + 1;
         end if;
+    end process;
+
+    check: postponed process(referenceO)
+    begin
+        assert O = referenceO report "Mismatch on output O";
     end process;
 
     test: process
@@ -92,9 +98,7 @@ begin
             A <= testA;
             B <= testB;
 
-            wait for 1 ps;
-
-            assert O = testO report "Mismatch on output O";
+            referenceO <= testO;
         end loop;
 
         finished <= true;
