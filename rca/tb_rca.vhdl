@@ -6,7 +6,7 @@ entity tb_rca is
 end tb_rca;
 
 architecture test of tb_rca is
-    constant N: integer := 4;
+    constant N: integer := 2;
     signal A, B, S: std_logic_vector(N-1 downto 0);
     signal Ci, Co: std_logic;
 

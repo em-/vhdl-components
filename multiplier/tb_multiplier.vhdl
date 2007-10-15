@@ -6,7 +6,7 @@ entity tb_multiplier is
 end tb_multiplier;
 
 architecture test of tb_multiplier is
-    constant N: integer := 4;
+    constant N: integer := 2;
     signal A, B: std_logic_vector (N-1 downto 0);
     signal O: std_logic_vector (2*N-1 downto 0);
 

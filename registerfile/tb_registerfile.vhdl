@@ -41,7 +41,7 @@ begin
 
     process
     begin
-        for i in 0 to 100 loop
+        for i in 0 to 42 loop
             CLK <= '1', '0' after clk_period/2;
             wait for clk_period;
         end loop;
