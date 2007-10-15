@@ -14,7 +14,7 @@ architecture test of tb_iv is
               O: out std_logic);
     end component;
 begin
-    uiv: iv port map (INPUT, OUTPUT);
+    u: iv port map (INPUT, OUTPUT);
 
     INPUT <= '0' after 1 ns, '1' after 2 ns, '0' after 10 ns;
 

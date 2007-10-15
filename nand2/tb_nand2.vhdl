@@ -15,7 +15,7 @@ architecture test of tb_nand2 is
               O:   out std_logic);
     end component;
 begin
-    Unand2: nand2
+    U: nand2
         generic map (DELAY => 0.2 ns)
         port map (input1, input2, output);
 
