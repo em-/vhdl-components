@@ -139,6 +139,9 @@ $(TESTBENCHES):
 %.o: */%.vhdl
 	$(GHDL) -a $(GHDLFLAGS) $<
 
+graphs: run
+	for i in *.vcd; do echo $$i; vcd-display -m "u" $$i `basename $$i .vcd`.ps; done
+
 # Syntax check target
 check:
 	$(GHDL) -s $(GHDLFLAGS) */*.vhdl
