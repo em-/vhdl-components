@@ -44,8 +44,6 @@ begin
 
             A <= testA;
             B <= testB;
-            S <= testS;
-            Co <= testCo;
 
             wait for t * 1 ns - now;
 
