@@ -62,7 +62,7 @@ begin
         variable reference: std_logic_vector(OUT1'Range);
     begin
         wait for 1 ns;
-        reference := (others => '0');
+        reference := (others => 'U');
         assert OUT1 = reference;
         assert OUT2 = reference;
 
