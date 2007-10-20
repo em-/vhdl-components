@@ -20,6 +20,7 @@ TESTBENCHES=tb_or2_logic		\
 	    tb_rca_structural		\
 	    tb_rca_behavioral		\
 	    tb_mux21_1bit_behavioral	\
+	    tb_mux21_1bit_logic		\
 	    tb_mux21_1bit_structural	\
 	    tb_mux21_behavioral		\
 	    tb_mux21_structural		\

@@ -43,6 +43,14 @@ configuration tb_mux21_1bit_structural of tb_mux21_1bit is
    end for;
 end tb_mux21_1bit_structural;
 
+configuration tb_mux21_1bit_logic of tb_mux21_1bit is
+   for test
+      for all: mux21_1bit
+         use configuration work.cfg_mux21_1bit_logic;
+      end for;
+   end for;
+end tb_mux21_1bit_logic;
+
 configuration tb_mux21_1bit_behavioral of tb_mux21_1bit is
    for test
       for all: mux21_1bit
