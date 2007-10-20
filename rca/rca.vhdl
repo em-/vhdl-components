@@ -16,13 +16,13 @@ architecture behavioral of rca is
 begin
     process (A, B, Ci)
         variable sum: unsigned (N downto 0);
-        variable unsigned_A, unsigned_B, unsigned_Ci: unsigned (sum'Range);
+        variable unsignedA, unsignedB, unsignedCi: unsigned(sum'Range);
     begin
-        unsigned_A := '0' & unsigned(A);
-        unsigned_B := '0' & unsigned(B);
-        unsigned_Ci := (0 => Ci, others => '0');
+        unsignedA := '0' & unsigned(A);
+        unsignedB := '0' & unsigned(B);
+        unsignedCi := (0 => Ci, others => '0');
 
-        sum := unsigned_A + unsigned_B + unsigned_Ci;
+        sum := unsignedA + unsignedB + unsignedCi;
 
         S  <= std_logic_vector (sum(N-1 downto 0)) after DELAY_S;
         Co <= std_logic (sum (N)) after DELAY_Co;

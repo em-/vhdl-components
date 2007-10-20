@@ -33,10 +33,11 @@ begin
                 wait for 1 ns;
 
                 assert to_integer(unsigned(Co & S)) = i+j+1
-                    report "expected " & integer'Image(i) & "+" & integer'Image(j) &
-                           "+1=" & integer'Image(i+j+1) &
-                           " got " & integer'Image(to_integer(unsigned(S))) &
-                           " + " & std_logic'Image(Co);
+                    report "expected " & integer'Image(i) &
+                        "+" & integer'Image(j) & "+1=" &
+                        integer'Image(i+j+1) & " got " &
+                        integer'Image(to_integer(unsigned(S))) &
+                        " + " & std_logic'Image(Co);
             end loop;
         end loop;
         wait;

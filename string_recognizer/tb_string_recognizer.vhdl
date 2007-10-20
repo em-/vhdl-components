@@ -6,8 +6,10 @@ end tb_string_recognizer;
 
 architecture test of tb_string_recognizer is
     constant clk_period: time := 1 ns; -- Clock period (1 GHz)
-    constant test_stream: std_logic_vector (0 to 19) := "00110010001101001010";
-    constant reference:   std_logic_vector (0 to 19) := "U0000000100000010010";
+    constant test_stream: 
+            std_logic_vector (0 to 19) := "00110010001101001010";
+    constant reference:
+            std_logic_vector (0 to 19) := "U0000000100000010010";
 
     signal CLK: std_logic;
     signal RST: std_logic;

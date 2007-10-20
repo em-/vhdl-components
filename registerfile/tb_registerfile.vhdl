@@ -50,13 +50,15 @@ begin
 
     RST <= '1', '0' after 4 ns;
     EN  <= '0', '1' after 3 ns, '0' after 14 ns, '1' after 15 ns;
-    WR  <= '0', '1' after 6 ns, '0' after 7 ns,  '1' after 10 ns, '0' after 20 ns;
+    WR  <= '0', '1' after 6 ns, '0' after 7 ns,
+                '1' after 10 ns, '0' after 20 ns;
     RD1 <= '1', '0' after 5 ns, '1' after 8 ns,  '0' after 20 ns;
     RD2 <= '0', '1' after 17 ns;
     ADDR_WR  <= "10110", "01000" after 9 ns;
     ADDR_RD1 <= "10110", "01000" after 11 ns;
     ADDR_RD2 <= "11100", "01000" after 9 ns;
-    DATA_IN <= (0 => '1', others => '0'), (0 => '0', others => '1') after 10 ns;
+    DATA_IN <= (0 => '1', others => '0'),
+               (0 => '0', others => '1') after 10 ns;
 
     process
         variable reference: std_logic_vector(OUT1'Range);
