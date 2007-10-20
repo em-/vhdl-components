@@ -1,5 +1,5 @@
 -- Tests for mux41
--- time A B C D SEL O (terminating space needed)
+-- time A B C D SEL O
 1 00 00 00 00 00 00 
 2 01 00 00 00 00 01 
 3 00 11 00 00 01 11 
