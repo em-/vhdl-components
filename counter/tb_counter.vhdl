@@ -11,8 +11,8 @@ end tb_counter;
 architecture test of tb_counter is
     signal CLK, RST: std_logic := '0';
     signal EN: std_logic;
-    signal S: std_logic_vector(2 downto 0);
-    signal OFLW: std_logic;
+    signal S, referenceS: std_logic_vector(2 downto 0);
+    signal OFLW, referenceOFLW: std_logic;
     signal clock_counter: integer := -1;
 
     component counter
@@ -40,6 +40,16 @@ begin
         if rising_edge(CLK) then
             clock_counter <= clock_counter + 1;
         end if;
+    end process;
+
+    checkS: postponed process(referenceS)
+    begin
+        assert S = referenceS report "Mismatch on output S";
+    end process;
+
+    checkOFLW: postponed process(referenceOFLW)
+    begin
+        assert OFLW = referenceOFLW report "Mismatch on output OFLW";
     end process;
 
     test: process
@@ -73,8 +83,8 @@ begin
             RST <= testRST;
             EN <= testEN;
 
-            assert S = testS report "Mismatch on output S";
-            assert OFLW = testOFLW report "Mismatch on output OFLW";
+            referenceS <= testS;
+            referenceOFLW <= testOFLW;
         end loop;
 
         finished <= true;
