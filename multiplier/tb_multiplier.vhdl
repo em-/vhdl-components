@@ -28,13 +28,15 @@ begin
                 wait for 1 ns;
                 for k in O'Range loop
                 assert O(k) = to_unsigned(i*j, O'Length)(k)
-                    report "O(" & integer'Image(k) & ") is " & std_logic'Image(O(k)) &
-                            " expected " & std_logic'Image(to_unsigned(i*j, O'Length)(k));
+                    report "O(" & integer'Image(k) & ") is " &
+                        std_logic'Image(O(k)) & " expected " &
+                        std_logic'Image(to_unsigned(i*j, O'Length)(k));
                 end loop;
                 assert to_integer(unsigned(O)) = i*j
-                    report "expected " & integer'Image(i) & "*" & integer'Image(j) &
-                           "=" & integer'Image(i*j) &
-                           " got " & integer'Image(to_integer(unsigned(O)));
+                    report "expected " & integer'Image(i) & "*" &
+                        integer'Image(j) & "=" &
+                        integer'Image(i*j) & " got " &
+                        integer'Image(to_integer(unsigned(O)));
             end loop;
         end loop;
         wait;

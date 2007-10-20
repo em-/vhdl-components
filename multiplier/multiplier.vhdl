@@ -30,7 +30,8 @@ architecture structural of multiplier is
               O:    out std_logic);
     end component;
 
-    type SignalVector is array (N-1 downto 0) of std_logic_vector(N-1 downto 0);
+    type SignalVector is array (N-1 downto 0)
+                         of std_logic_vector(N-1 downto 0);
     signal tAND, S, C: SignalVector;
 begin
     ands: for i in B'Range generate
@@ -50,11 +51,13 @@ begin
 
         fas: for j in 1 to N-2 generate
             fas_ij: fa
-            port map (S(i-1)(j+1), tAND(i)(j), C(i)(j-1), S(i)(j), C(i)(j));
+            port map (S(i-1)(j+1), tAND(i)(j), C(i)(j-1),
+                      S(i)(j), C(i)(j));
         end generate;
 
         fa_i_last: fa
-        port map (C(i-1)(N-1), tAND(i)(N-1), C(i)(N-2), S(i)(N-1), C(i)(N-1));
+        port map (C(i-1)(N-1), tAND(i)(N-1), C(i)(N-2),
+                  S(i)(N-1), C(i)(N-1));
     end generate;
 
     O(2*N-2 downto N-1) <= S(N-1);
