@@ -48,7 +48,7 @@ begin
         wait;
     end process;
 
-    RST <= '1', '0' after 5 ns;
+    RST <= '1', '0' after 4 ns;
     EN  <= '0', '1' after 3 ns, '0' after 14 ns, '1' after 15 ns;
     WR  <= '0', '1' after 6 ns, '0' after 7 ns,  '1' after 10 ns, '0' after 20 ns;
     RD1 <= '1', '0' after 5 ns, '1' after 8 ns,  '0' after 20 ns;
@@ -66,7 +66,11 @@ begin
         assert OUT1 = reference;
         assert OUT2 = reference;
 
-        wait for 8 ns; -- 9 ns
+        wait for 4 ns; -- 5 ns
+        reference := (others => '0');
+        assert OUT1 = reference;
+
+        wait for 4 ns; -- 9 ns
         reference := (0 => '1', others => '0');
         assert OUT1 = reference;
 
