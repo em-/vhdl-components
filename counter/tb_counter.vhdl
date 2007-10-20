@@ -12,7 +12,7 @@ architecture test of tb_counter is
     signal CLK, RST: std_logic := '0';
     signal EN: std_logic;
     signal S: std_logic_vector(2 downto 0);
-    signal OWFL: std_logic;
+    signal OFLW: std_logic;
     signal clock_counter: integer := -1;
 
     component counter
@@ -20,13 +20,13 @@ architecture test of tb_counter is
         port (CLK, RST: in    std_logic;
               EN:       in    std_logic;
               S:        inout std_logic_vector (N-1 downto 0);
-              OWFL:     out   std_logic
+              OFLW:     out   std_logic
         );
     end component;
 
     signal finished: boolean := false;
 begin
-    U: counter port map (CLK, RST, EN, S, OWFL);
+    U: counter port map (CLK, RST, EN, S, OFLW);
 
     clock: process
     begin
@@ -45,7 +45,7 @@ begin
     test: process
         variable testRST, testEN: std_logic;
         variable testS: std_logic_vector(2 downto 0);
-        variable testOWFL: std_logic;
+        variable testOFLW: std_logic;
         file test_file: text is in "counter/tb_counter.test";
 
         variable l: line;
@@ -66,7 +66,7 @@ begin
             read(l, testEN);
 
             read(l, testS);
-            read(l, testOWFL);
+            read(l, testOFLW);
 
             wait on clock_counter until clock_counter = t;
 
@@ -74,7 +74,7 @@ begin
             EN <= testEN;
 
             assert S = testS report "Mismatch on output S";
-            assert OWFL = testOWFL report "Mismatch on output OWFL";
+            assert OFLW = testOFLW report "Mismatch on output OFLW";
         end loop;
 
         finished <= true;

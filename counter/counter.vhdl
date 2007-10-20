@@ -7,7 +7,7 @@ entity counter is
     port (CLK, RST: in    std_logic;
           EN:       in    std_logic;
           S:        inout std_logic_vector (N-1 downto 0);
-          OWFL:     out   std_logic
+          OFLW:     out   std_logic
     );
 end counter;
 
@@ -17,11 +17,11 @@ begin
     begin
         if RST = '0' then
             S <= (others => '0');
-            OWFL <= '0';
+            OFLW <= '0';
         elsif rising_edge(CLK) and EN = '0' then
-            OWFL <= '0';
+            OFLW <= '0';
             if S = (S'Range => '1') then
-                OWFL <= '1';
+                OFLW <= '1';
             end if;
             S <= std_logic_vector(unsigned(S)+1);
         end if;
@@ -46,7 +46,7 @@ architecture structural of counter is
     signal sum: std_logic_vector (N-1 downto 0);
 begin
     carry(0) <= '1';
-    OWFL <= carry(N);
+    OFLW <= carry(N);
 
     count: for i in N-1 downto 0 generate
         ha_i: ha port map (S(i), carry(i), sum(i), carry(i+1));
