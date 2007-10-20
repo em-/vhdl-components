@@ -48,8 +48,6 @@ begin
             A <= testA;
             B <= testB;
             Ci <= testCi;
-            S <= testS;
-            Co <= testCo;
 
             wait for t * 1 ns - now;
 
