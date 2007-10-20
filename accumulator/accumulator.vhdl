@@ -58,7 +58,7 @@ architecture structural of accumulator is
               O:         out std_logic_vector (N-1 downto 0));
     end component;
 begin
-    O <= OUT_REG after 0 ns;
+    O <= OUT_REG;
 
     input: mux21
             generic map (N)
