@@ -37,10 +37,10 @@ begin
             read(l, t, good => good);
             next when not good;
 
-            read(l, testA);  -- read A value
-            read(l, testB);  -- read B value
-            read(l, testS);  -- read C value
-            read(l, testCo);  -- read O value
+            read(l, testA);
+            read(l, testB);
+            read(l, testS);
+            read(l, testCo);
 
             A <= testA;
             B <= testB;
