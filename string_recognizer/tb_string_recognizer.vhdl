@@ -7,7 +7,7 @@ end tb_string_recognizer;
 architecture test of tb_string_recognizer is
     constant clk_period: time := 1 ns; -- Clock period (1 GHz)
     constant test_stream: std_logic_vector (0 to 19) := "00110010001101001010";
-    constant reference:   std_logic_vector (0 to 19) := "00000000100000010010";
+    constant reference:   std_logic_vector (0 to 19) := "U0000000100000010010";
 
     signal CLK: std_logic;
     signal RST: std_logic;
@@ -23,6 +23,17 @@ begin
     U: string_recognizer
         port map (CLK, RST, INPUT, OUTPUT);
 
+    postponed process
+        variable i: integer;
+    begin
+        for i in reference'Range loop
+            assert OUTPUT = reference(i)
+                report "expected " & std_logic'Image(reference(i)) &
+                       " got "     & std_logic'Image(OUTPUT);
+            wait until rising_edge(CLK);
+        end loop;
+    end process;
+
     process
         variable i: integer;
     begin
@@ -35,10 +46,6 @@ begin
 
         for i in test_stream'Range loop
             INPUT <= test_stream(i);
-
-            assert OUTPUT = reference(i)
-                report "expected " & std_logic'Image(reference(i)) &
-                       " got "     & std_logic'Image(OUTPUT);
 
             CLK <= '1', '0' after clk_period/2;
             wait for clk_period;

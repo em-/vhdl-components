@@ -39,15 +39,14 @@ begin
                     next_state <= S01;
                 end if;
             when S01 =>
+                O <= '0';
                 if I='0' then
-                    O <= '1';
                     next_state <= S010;
                 else
-                    O <= '0';
                     next_state <= S;
                 end if;
             when S010 =>
-                O <= '0';
+                O <= '1';
                 if I='0' then
                     next_state <= S0;
                 else
