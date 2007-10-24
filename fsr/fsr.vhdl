@@ -1,22 +1,22 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity fjk is
+entity fsr is
     port (CLK, RST: in  std_logic;
-          J, K:     in  std_logic;
+          S, R:     in  std_logic;
           Q:        out std_logic);
-end fjk;
+end fsr;
 
-architecture behavioral_async of fjk is
+architecture behavioral_async of fsr is
 begin
 process (CLK, RST)
-    variable JK: std_logic_vector (1 downto 0);
+    variable SR: std_logic_vector (1 downto 0);
 begin
     if RST = '1' then
         Q <= '0';
     elsif rising_edge(CLK) then
-        JK := J & K;
-        case JK is
+        SR := S & R;
+        case SR is
             when "00" =>
             when "10" =>
                 Q <= '1';
@@ -30,17 +30,17 @@ begin
 end process;
 end behavioral_async;
 
-architecture behavioral_sync of fjk is
+architecture behavioral_sync of fsr is
 begin
 process (CLK)
-    variable JK: std_logic_vector (1 downto 0);
+    variable SR: std_logic_vector (1 downto 0);
 begin
     if rising_edge(CLK) then
         if RST = '1' then
             Q <= '0';
         else
-            JK := J & K;
-            case JK is
+            SR := S & R;
+            case SR is
                 when "00" =>
                 when "10" =>
                     Q <= '1';
@@ -55,12 +55,12 @@ end process;
 end behavioral_sync;
 
 
-configuration cfg_fjk_behavioral_async of fjk is
+configuration cfg_fsr_behavioral_async of fsr is
     for behavioral_async
     end for;
-end cfg_fjk_behavioral_async;
+end cfg_fsr_behavioral_async;
 
-configuration cfg_fjk_behavioral_sync of fjk is
+configuration cfg_fsr_behavioral_sync of fsr is
     for behavioral_sync
     end for;
-end cfg_fjk_behavioral_sync;
+end cfg_fsr_behavioral_sync;

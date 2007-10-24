@@ -5,24 +5,24 @@ use std.textio.all;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_textio.all; -- synopsys only
 
-entity tb_fjk is
-end tb_fjk;
+entity tb_fsr is
+end tb_fsr;
 
-architecture test of tb_fjk is
+architecture test of tb_fsr is
     signal CLK, RST: std_logic := '0';
-    signal J, K: std_logic;
+    signal S, R: std_logic;
     signal Q: std_logic;
     signal counter: integer := -1;
 
-    component fjk port (
+    component fsr port (
         CLK, RST: in  std_logic;
-        J, K:     in  std_logic;
+        S, R:     in  std_logic;
         Q:        out std_logic);
     end component;
 
     signal finished: boolean := false;
 begin
-    U: fjk port map (CLK, RST, J, K, Q);
+    U: fsr port map (CLK, RST, S, R, Q);
 
     clock: process
     begin
@@ -39,8 +39,8 @@ begin
     end process;
 
     test: process
-        variable testRST, testJ, testK, testQ: std_logic;
-        file test_file: text is in "fjk/tb_fjk.test";
+        variable testRST, testS, testR, testQ: std_logic;
+        file test_file: text is in "fsr/tb_fsr.test";
 
         variable l: line;
         variable i: integer;
@@ -57,16 +57,16 @@ begin
             next when not good;
 
             read(l, testRST);
-            read(l, testJ);
-            read(l, testK);
+            read(l, testS);
+            read(l, testR);
 
             read(l, testQ);
 
             wait on counter until counter = i;
 
             RST <= testRST;
-            J <= testJ;
-            K <= testK;
+            S <= testS;
+            R <= testR;
 
             assert Q = testQ report "Mismatch on output Q";
         end loop;
@@ -76,18 +76,18 @@ begin
     end process;
 end test;
 
-configuration tb_fjk_behavioral_async of tb_fjk is
+configuration tb_fsr_behavioral_async of tb_fsr is
     for test
-        for all: fjk
-            use configuration work.cfg_fjk_behavioral_async;
+        for all: fsr
+            use configuration work.cfg_fsr_behavioral_async;
         end for;
     end for;
-end tb_fjk_behavioral_async;
+end tb_fsr_behavioral_async;
 
-configuration tb_fjk_behavioral_sync of tb_fjk is
+configuration tb_fsr_behavioral_sync of tb_fsr is
     for test
-        for all: fjk
-            use configuration work.cfg_fjk_behavioral_sync;
+        for all: fsr
+            use configuration work.cfg_fsr_behavioral_sync;
         end for;
     end for;
-end tb_fjk_behavioral_sync;
+end tb_fsr_behavioral_sync;

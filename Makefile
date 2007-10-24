@@ -35,8 +35,8 @@ TESTBENCHES=tb_or2_logic		\
 	    tb_fd_behavioral_sync	\
 	    tb_ft_behavioral_async	\
 	    tb_ft_behavioral_sync	\
-	    tb_fjk_behavioral_async	\
-	    tb_fjk_behavioral_sync	\
+	    tb_fsr_behavioral_async	\
+	    tb_fsr_behavioral_sync	\
 	    tb_reg_behavioral		\
 	    tb_reg_structural		\
 	    tb_registerfile_behavioral	\
@@ -100,9 +100,9 @@ tb_fd.o: fd.o
 tb_ft_behavioral_async: tb_ft.o
 tb_ft_behavioral_sync: tb_ft.o
 tb_ft.o: ft.o
-tb_fjk_behavioral_async: tb_fjk.o
-tb_fjk_behavioral_sync: tb_fjk.o
-tb_fjk.o: fjk.o
+tb_fsr_behavioral_async: tb_fsr.o
+tb_fsr_behavioral_sync: tb_fsr.o
+tb_fsr.o: fsr.o
 tb_reg_behavioral: tb_reg.o
 tb_reg_structural: tb_reg.o
 tb_reg.o: reg.o
