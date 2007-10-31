@@ -28,9 +28,9 @@ begin
               '0' after 12.15 ns, '1' after 13 ns,
               '0' after 13.11 ns;
 
-    process
+    postponed process
     begin
-        wait for 1.21 ns;
+        wait for 1.2 ns;
         assert output = '0';
         wait for 1 ns;
         assert output = '1';
