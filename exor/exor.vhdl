@@ -11,6 +11,11 @@ begin
     O <= A xor B;
 end logic;
 
+architecture logic_transport of exor is
+begin
+    O <= transport A xor B;
+end logic_transport;
+
 architecture behavioral of exor is
 begin
     process (A, B)
@@ -28,8 +33,12 @@ configuration cfg_exor_logic of exor is
     end for;
 end cfg_exor_logic;
 
+configuration cfg_exor_logic_transport of exor is
+    for logic_transport
+    end for;
+end cfg_exor_logic_transport;
+
 configuration cfg_exor_behavioral of exor is
     for behavioral
     end for;
 end cfg_exor_behavioral;
-

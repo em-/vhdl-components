@@ -55,6 +55,14 @@ configuration tb_exor_logic of tb_exor is
     end for;
 end tb_exor_logic;
 
+configuration tb_exor_logic_transport of tb_exor is
+    for test
+        for all: exor
+            use configuration work.cfg_exor_logic_transport;
+        end for;
+    end for;
+end tb_exor_logic_transport;
+
 configuration tb_exor_behavioral of tb_exor is
     for test
         for all: exor

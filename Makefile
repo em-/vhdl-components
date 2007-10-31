@@ -13,6 +13,7 @@ TESTBENCHES=tb_or2_logic		\
 	    tb_iv_behavioral		\
 	    tb_iv_behavioral_delay	\
 	    tb_exor_logic		\
+	    tb_exor_logic_transport	\
 	    tb_exor_behavioral		\
 	    tb_ha			\
 	    tb_fa_logic			\
@@ -71,6 +72,7 @@ tb_iv_behavioral: tb_iv.o
 tb_iv_behavioral_delay: tb_iv.o
 tb_iv.o: iv.o
 tb_exor_logic: tb_exor.o
+tb_exor_logic_transport: tb_exor.o
 tb_exor_behavioral: tb_exor.o
 tb_exor.o: exor.o
 tb_ha: ha.o tb_ha.o
