@@ -54,3 +54,20 @@ begin
         wait;
     end process;
 end test;
+
+
+configuration tb_ha_logic of tb_ha is
+   for test
+      for all: ha
+         use configuration work.cfg_ha_logic;
+      end for;
+   end for;
+end tb_ha_logic;
+
+configuration tb_ha_structural of tb_ha is
+   for test
+      for all: ha
+         use configuration work.cfg_ha_structural;
+      end for;
+   end for;
+end tb_ha_structural;

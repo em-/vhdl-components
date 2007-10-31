@@ -15,7 +15,8 @@ TESTBENCHES=tb_or2_logic		\
 	    tb_exor_logic		\
 	    tb_exor_logic_transport	\
 	    tb_exor_behavioral		\
-	    tb_ha			\
+	    tb_ha_logic			\
+	    tb_ha_structural		\
 	    tb_fa_logic			\
 	    tb_fa_behavioral		\
 	    tb_rca_structural		\
@@ -75,7 +76,9 @@ tb_exor_logic: tb_exor.o
 tb_exor_logic_transport: tb_exor.o
 tb_exor_behavioral: tb_exor.o
 tb_exor.o: exor.o
-tb_ha: ha.o tb_ha.o
+tb_ha_logic: tb_ha.o
+tb_ha_structural: tb_ha.o
+tb_ha.o: ha.o
 tb_fa_logic: tb_fa.o
 tb_fa_behavioral: tb_fa.o
 tb_fa.o: fa.o
