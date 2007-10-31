@@ -10,6 +10,7 @@ architecture test of tb_exor is
     signal output: std_logic;
 
     component exor
+        generic (DELAY: time := 0 ns);
         port (A, B: in  std_logic;
               O:    out std_logic);
     end component;
