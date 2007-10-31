@@ -16,6 +16,7 @@ architecture test of tb_exor is
     end component;
 begin
     u: exor
+        generic map (0.2 ns)
         port map (inputA, inputB, output);
 
     inputA <= '0' after 1 ns, '1' after 2 ns,
@@ -24,12 +25,12 @@ begin
               '0' after 13.11 ns;
     inputB <= '0' after 1 ns, '1' after 3 ns,
               '0' after 11 ns, '1' after 12 ns,
-              '0' after 12.05 ns, '1' after 13 ns,
+              '0' after 12.15 ns, '1' after 13 ns,
               '0' after 13.11 ns;
 
     process
     begin
-        wait for 1.01 ns;
+        wait for 1.21 ns;
         assert output = '0';
         wait for 1 ns;
         assert output = '1';
