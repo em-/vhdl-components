@@ -43,6 +43,8 @@ configuration tb_mux21_1bit_structural of tb_mux21_1bit is
              for Unand3: nand2 use entity work.nand2
                  generic map (0.2 ns);
              end for;
+             for Uiv: iv use entity work.iv(behavioral);
+             end for;
          end for;
       end for;
    end for;
