@@ -24,6 +24,7 @@ TESTBENCHES=tb_or2_logic		\
 	    tb_mux21_1bit_behavioral	\
 	    tb_mux21_1bit_logic		\
 	    tb_mux21_1bit_structural	\
+	    tb_mux21_1bit_structural_transport	\
 	    tb_mux21_behavioral		\
 	    tb_mux21_structural		\
 	    tb_mux41			\
@@ -85,6 +86,7 @@ tb_fa.o: fa.o
 tb_mux21_1bit_behavioral: tb_mux21_1bit.o
 tb_mux21_1bit_logic: tb_mux21_1bit.o
 tb_mux21_1bit_structural: tb_mux21_1bit.o
+tb_mux21_1bit_structural_transport: tb_mux21_1bit.o
 tb_mux21_1bit.o: mux21_1bit.o
 tb_mux21_behavioral: tb_mux21.o
 tb_mux21_structural: tb_mux21.o
