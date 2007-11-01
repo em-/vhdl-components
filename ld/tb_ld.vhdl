@@ -27,8 +27,10 @@ begin
     end process;
 
     RST <= '1' after 1 ns, '0' after 2 ns, '1' after 8 ns, '0' after 9 ns;
-    D <= '1' after 1 ns, '0' after 3 ns, '1' after 4 ns, '0' after 5 ns,
-         '1' after 6 ns, '0' after 12 ns;
+    D <= '1' after 1 ns, '0' after 3.25 ns, '1' after 4 ns,
+         '0' after 5 ns, '1' after 6 ns,
+         '0' after 7.25 ns, '1' after 7.60 ns, '0' after 7.70 ns,
+         '1' after 7.85 ns, '0' after 12 ns;
 
     finished <= true after 12 ns;
 
@@ -48,7 +50,11 @@ begin
         assert Q = '0';
         wait for 1 ns; -- 7 ns
         assert Q = '1';
-        wait for 1 ns; -- 8 ns
+        wait for 0.25 ns; -- 7.25 ns
+        assert Q = '1';
+        wait for 0.40 ns; -- 7.65 ns
+        assert Q = '1';
+        wait for 0.35 ns; -- 8 ns
         assert Q = '1';
         wait for 1 ns; -- 9 ns
         assert Q = '0';
