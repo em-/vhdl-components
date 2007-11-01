@@ -55,7 +55,7 @@ configuration cfg_mux21_1bit_behavioral of mux21_1bit is
 end cfg_mux21_1bit_behavioral;
 
 configuration cfg_mux21_1bit_logic of mux21_1bit is
-    for behavioral
+    for logic
     end for;
 end cfg_mux21_1bit_logic;
 
