@@ -16,10 +16,12 @@ begin
     U: mux21_1bit port map (A, B, SEL, O);
 
     A <= '0' after 1 ns, '1' after 2 ns, '0' after 10 ns;
-    B <= '0', '1' after 12 ns, '0' after 12.05 ns,
+    B <= '0', '1' after 5 ns, '0' after 8 ns,
+              '1' after 12 ns, '0' after 12.05 ns,
               '1' after 13 ns, '0' after 13.11 ns,
               '1' after 15 ns, '0' after 15.3 ns ;
-    SEL <= '0' after 1 ns, '1' after 3 ns, '0' after 9 ns, '1' after 11 ns;
+    SEL <= '0' after 1 ns, '1' after 3 ns, 
+           '0' after 6 ns, '1' after 7 ns;
 
     check: postponed process
     begin
