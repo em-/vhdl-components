@@ -1,9 +1,5 @@
-library std;
 library ieee;
-
-use std.textio.all;
 use ieee.std_logic_1164.all;
-use ieee.std_logic_textio.all; -- synopsys only
 
 entity tb_ld is
 end tb_ld;
@@ -12,7 +8,6 @@ architecture test of tb_ld is
     signal CLK, RST: std_logic := '0';
     signal D: std_logic;
     signal Q: std_logic;
-    signal counter: integer := -1;
 
     component ld port (
         CLK, RST: in  std_logic;
@@ -31,45 +26,38 @@ begin
         wait for 0.5 ns;
     end process;
 
-    count: process(CLK)
+    RST <= '1' after 1 ns, '0' after 2 ns, '1' after 8 ns, '0' after 9 ns;
+    D <= '1' after 1 ns, '0' after 3 ns, '1' after 4 ns, '0' after 5 ns,
+         '1' after 6 ns, '0' after 12 ns;
+
+    finished <= true after 12 ns;
+
+    check: process
     begin
-        if rising_edge(CLK) then
-            counter <= counter + 1;
-        end if;
-    end process;
-
-    test: process
-        variable testRST, testD, testQ: std_logic;
-        file test_file: text is in "ld/tb_ld.test";
-
-        variable l: line;
-        variable t: integer;
-        variable good: boolean;
-    begin
-        wait on counter;
-
-        while not endfile(test_file) loop
-            readline(test_file, l);
-
-            -- read the time from the beginning of the line
-            -- skip the line if it doesn't start with an integer
-            read(l, t, good => good);
-            next when not good;
-
-            read(l, testRST);
-            read(l, testD);
-
-            read(l, testQ);
-
-            wait on counter until counter = t;
-
-            RST <= testRST;
-            D <= testD;
-
-            assert Q = testQ report "Mismatch on output Q";
-        end loop;
-
-        finished <= true;
+        wait for 1 ns; -- 1 ns
+        assert Q = 'U';
+        wait for 1 ns; -- 2 ns
+        assert Q = '0';
+        wait for 1 ns; -- 3 ns
+        assert Q = '1';
+        wait for 1 ns; -- 4 ns
+        assert Q = '0';
+        wait for 1 ns; -- 5 ns
+        assert Q = '1';
+        wait for 1 ns; -- 6 ns
+        assert Q = '0';
+        wait for 1 ns; -- 7 ns
+        assert Q = '1';
+        wait for 1 ns; -- 8 ns
+        assert Q = '1';
+        wait for 1 ns; -- 9 ns
+        assert Q = '0';
+        wait for 1 ns; -- 10 ns
+        assert Q = '1';
+        wait for 1 ns; -- 11 ns
+        assert Q = '1';
+        wait for 1 ns; -- 12 ns
+        assert Q = '1';
         wait;
     end process;
 end test;
