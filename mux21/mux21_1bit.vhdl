@@ -20,8 +20,10 @@ end process;
 end behavioral;
 
 architecture logic of mux21_1bit is
+    signal nSEL: std_logic;
 begin
-    O <= (A and (not SEL)) or (B and SEL);
+    nSEL <= not SEL after 0.1 ns;
+    O <= (A and (nSEL)) or (B and SEL);
 end logic;
 
 architecture structural of mux21_1bit is
