@@ -38,7 +38,12 @@ end test;
 configuration tb_mux21_1bit_structural of tb_mux21_1bit is
    for test
       for all: mux21_1bit
-         use configuration work.cfg_mux21_1bit_structural;
+         use entity work.mux21_1bit(structural);
+         for structural
+             for Unand3: nand2 use entity work.nand2
+                 generic map (0.2 ns);
+             end for;
+         end for;
       end for;
    end for;
 end tb_mux21_1bit_structural;
