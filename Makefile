@@ -83,6 +83,7 @@ tb_fa_logic: tb_fa.o
 tb_fa_behavioral: tb_fa.o
 tb_fa.o: fa.o
 tb_mux21_1bit_behavioral: tb_mux21_1bit.o
+tb_mux21_1bit_logic: tb_mux21_1bit.o
 tb_mux21_1bit_structural: tb_mux21_1bit.o
 tb_mux21_1bit.o: mux21_1bit.o
 tb_mux21_behavioral: tb_mux21.o
