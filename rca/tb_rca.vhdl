@@ -11,7 +11,8 @@ architecture test of tb_rca is
     signal Ci, Co: std_logic;
 
     component rca
-        generic (N: integer);
+        generic (N: integer;
+                 DELAY_S, DELAY_Co: time := 0 ns);
         port (A, B: in  std_logic_vector (N-1 downto 0);
               Ci:   in  std_logic;
               S:    out std_logic_vector (N-1 downto 0);
@@ -56,7 +57,8 @@ end tb_rca_behavioral;
 configuration tb_rca_structural of tb_rca is
     for test
         for all: rca
-            use configuration work.cfg_rca_structural;
+            use configuration work.cfg_rca_structural
+            generic map (N, 0.1 ns, 0.1 ns);
         end for;
     end for;
 end tb_rca_structural;
