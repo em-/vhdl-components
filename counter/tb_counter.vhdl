@@ -16,7 +16,7 @@ architecture test of tb_counter is
     signal clock_counter: integer := -1;
 
     component counter
-        generic (N: integer := 3;
+        generic (N: integer;
                  DELAY_S, DELAY_C: time := 0 ns);
         port (CLK, RST: in  std_logic;
               EN:       in  std_logic;
@@ -27,7 +27,9 @@ architecture test of tb_counter is
 
     signal finished: boolean := false;
 begin
-    U: counter port map (CLK, RST, EN, S, OFLW);
+    U: counter
+        generic map (3)
+        port map (CLK, RST, EN, S, OFLW);
 
     clock: process
     begin
