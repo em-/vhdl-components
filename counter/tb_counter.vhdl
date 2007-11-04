@@ -18,10 +18,10 @@ architecture test of tb_counter is
     component counter
         generic (N: integer := 3;
                  DELAY_S, DELAY_C: time := 0 ns);
-        port (CLK, RST: in    std_logic;
-              EN:       in    std_logic;
-              S:        inout std_logic_vector (N-1 downto 0);
-              OFLW:     out   std_logic
+        port (CLK, RST: in  std_logic;
+              EN:       in  std_logic;
+              S:        out std_logic_vector (N-1 downto 0);
+              OFLW:     out std_logic
         );
     end component;
 
