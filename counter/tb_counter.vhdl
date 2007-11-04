@@ -16,7 +16,8 @@ architecture test of tb_counter is
     signal clock_counter: integer := -1;
 
     component counter
-        generic (N: integer := 3);
+        generic (N: integer := 3;
+                 DELAY_S, DELAY_C: time := 0 ns);
         port (CLK, RST: in    std_logic;
               EN:       in    std_logic;
               S:        inout std_logic_vector (N-1 downto 0);
