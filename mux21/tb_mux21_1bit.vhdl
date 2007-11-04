@@ -31,11 +31,11 @@ begin
         assert O = '1';
         wait for 1 ns; -- 3.2 ns
         assert O = '0';
-        wait for 6 ns; -- 9.2 ns
+        wait for 4 ns; -- 7.2 ns
         assert O = '1';
-        wait for 1 ns; -- 10.2 ns
+        wait for 1 ns; -- 8.2 ns
         assert O = '0';
-        wait for 5 ns; -- 15.2 ns
+        wait for 7 ns; -- 15.2 ns
         assert O = '1';
         wait for 0.3 ns; -- 15.5 ns
         assert O = '0';
