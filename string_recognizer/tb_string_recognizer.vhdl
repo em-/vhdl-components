@@ -9,7 +9,7 @@ architecture test of tb_string_recognizer is
     constant test_stream: 
             std_logic_vector (0 to 19) := "00110010001101001010";
     constant reference:
-            std_logic_vector (0 to 19) := "U0000000100000010010";
+            std_logic_vector (0 to 19) := "U0000000010000001000";
 
     signal CLK: std_logic;
     signal RST: std_logic;
