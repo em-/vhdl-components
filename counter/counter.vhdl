@@ -3,7 +3,8 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity counter is
-    generic (N: integer := 8);
+    generic (N: integer := 8;
+             DELAY_S, DELAY_C: time := 0 ns);
     port (CLK, RST: in    std_logic;
           EN:       in    std_logic;
           S:        out   std_logic_vector (N-1 downto 0);
@@ -32,6 +33,7 @@ end behavioral;
 
 architecture structural of counter is
     component ha
+        generic (DELAY_S, DELAY_Co: time := 0 ns);
         port (A, B: in  std_logic;
               S:    out std_logic;
               Co:   out std_logic);
@@ -51,7 +53,9 @@ begin
     fd_overflow: fd_en port map (CLK, RST, EN, carry(N), OFLW);
 
     count_array: for i in N-1 downto 0 generate
-        ha_i: ha port map (count(i), carry(i), sum(i), carry(i+1));
+        ha_i: ha
+            generic map (DELAY_S, DELAY_C)
+            port map (count(i), carry(i), sum(i), carry(i+1));
         fd_en_i: fd_en port map (CLK, RST, EN, sum(i), count(i));
     end generate;
 
