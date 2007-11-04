@@ -9,7 +9,8 @@ entity tb_ft is
 end tb_ft;
 
 architecture test of tb_ft is
-    signal CLK, RST: std_logic := '0';
+    signal CLK: std_logic := '0';
+    signal RST: std_logic := '1';
     signal T: std_logic;
     signal Q: std_logic;
     signal counter: integer := -1;

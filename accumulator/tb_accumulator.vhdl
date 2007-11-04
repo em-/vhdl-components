@@ -11,7 +11,8 @@ end tb_accumulator;
 architecture test of tb_accumulator is
     constant N:        integer := 3;
 
-    signal CLK, RST:   std_logic := '0';
+    signal CLK:        std_logic := '0';
+    signal RST:        std_logic := '1';
     signal EN:         std_logic;
     signal A, B:       std_logic_vector (N-1 downto 0);
     signal ACCUMULATE: std_logic;

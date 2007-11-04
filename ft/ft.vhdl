@@ -13,7 +13,7 @@ begin
 process (CLK, RST)
     variable d: std_logic;
 begin
-    if RST = '0' then
+    if RST = '1' then
         d := '0';
     elsif rising_edge(CLK) then
         if T = '1' then
@@ -33,7 +33,7 @@ process (CLK, RST)
     variable d: std_logic;
 begin
     if rising_edge(CLK) then
-        if RST = '0' then
+        if RST = '1' then
             d := '0';
         elsif T = '1' then
             d := not d;

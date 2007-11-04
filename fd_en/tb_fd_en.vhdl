@@ -9,7 +9,8 @@ entity tb_fd_en is
 end tb_fd_en;
 
 architecture test of tb_fd_en is
-    signal CLK, RST: std_logic := '0';
+    signal CLK: std_logic := '0';
+    signal RST: std_logic := '1';
     signal EN, D: std_logic;
     signal Q: std_logic;
     signal counter: integer := -1;

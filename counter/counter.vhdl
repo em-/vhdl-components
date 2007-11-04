@@ -17,10 +17,10 @@ begin
     process (RST, CLK)
         variable count: unsigned(S'Range);
     begin
-        if RST = '0' then
+        if RST = '1' then
             count := (others => '0');
             OFLW <= '0';
-        elsif rising_edge(CLK) and EN = '0' then
+        elsif rising_edge(CLK) and EN = '1' then
             OFLW <= '0';
             if count = (count'Range => '1') then
                 OFLW <= '1';

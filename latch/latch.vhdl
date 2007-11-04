@@ -14,10 +14,10 @@ architecture behavioral of latch is
 begin
 process (RST, CLK)
 begin
-    if RST = '0' then
+    if RST = '1' then
         O <= (O'range => '0');
     elsif CLK = '0' then
-        if EN = '0' then
+        if EN = '1' then
             O <= A;
         end if;
     end if;

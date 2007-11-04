@@ -16,9 +16,9 @@ begin
     process (RST, CLK)
         variable feedback: unsigned (O'Range);
     begin
-        if RST = '0' then
+        if RST = '1' then
             feedback := (others => '0');
-        elsif rising_edge(CLK) and EN = '0' then
+        elsif rising_edge(CLK) and EN = '1' then
             if ACCUMULATE = '0' then
                 feedback := unsigned(A) * unsigned(B);
             else

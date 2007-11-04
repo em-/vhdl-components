@@ -9,7 +9,8 @@ entity tb_counter is
 end tb_counter;
 
 architecture test of tb_counter is
-    signal CLK, RST: std_logic := '0';
+    signal CLK: std_logic := '0';
+    signal RST: std_logic := '1';
     signal EN: std_logic;
     signal S, referenceS: std_logic_vector(2 downto 0);
     signal OFLW, referenceOFLW: std_logic;

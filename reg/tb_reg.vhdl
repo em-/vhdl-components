@@ -9,7 +9,8 @@ entity tb_reg is
 end tb_reg;
 
 architecture test of tb_reg is
-    signal CLK, RST: std_logic := '0';
+    signal CLK: std_logic := '0';
+    signal RST: std_logic := '1';
     signal EN: std_logic;
     signal A, O: std_logic_vector(2 downto 0);
     signal counter: integer := -1;
