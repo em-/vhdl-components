@@ -3,6 +3,7 @@ library ieee;
 
 use std.textio.all;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 use ieee.std_logic_textio.all; -- synopsys only
 
 entity tb_mac is
@@ -12,10 +13,9 @@ architecture test of tb_mac is
     constant N:        integer := 3;
 
     signal CLK:        std_logic := '0';
-    signal RST:        std_logic := '1';
+    signal RST:        std_logic;
     signal EN:         std_logic;
     signal A, B:       std_logic_vector (N-1 downto 0);
-    signal ACCUMULATE: std_logic;
     signal O:          std_logic_vector (2*N-1 downto 0);
     signal referenceO: std_logic_vector (O'Range);
 
@@ -24,7 +24,6 @@ architecture test of tb_mac is
         port (CLK, RST:   in  std_logic;
               EN:         in  std_logic;
               A, B:       in  std_logic_vector (N-1 downto 0);
-              ACCUMULATE: in  std_logic;
               O:          out std_logic_vector (2*N-1 downto 0));
     end component;
 
@@ -33,7 +32,7 @@ architecture test of tb_mac is
 begin
     U: mac
         generic map (N)
-        port map (CLK, RST, EN, A, B, ACCUMULATE, O);
+        port map (CLK, RST, EN, A, B, O);
 
     clock: process
     begin
@@ -51,11 +50,14 @@ begin
 
     check: postponed process(referenceO)
     begin
-        assert O = referenceO report "Mismatch on output O";
+        assert O = referenceO report "Mismatch on output O: got " & 
+                                    integer'Image(to_integer(unsigned(O))) &
+                                    " expected " &
+                                    integer'Image(to_integer(unsigned(referenceO)));
     end process;
 
     test: process
-        variable testRST, testEN, testACCUMULATE: std_logic;
+        variable testRST, testEN: std_logic;
         variable testA, testB: std_logic_vector(A'Range);
         variable testO: std_logic_vector(O'Range);
         file test_file: text is in "mac/tb_mac.test";
@@ -76,7 +78,6 @@ begin
 
             read(l, testRST);
             read(l, testEN);
-            read(l, testACCUMULATE);
 
             read(l, testA);
             read(l, testB);
@@ -87,7 +88,6 @@ begin
 
             RST <= testRST;
             EN <= testEN;
-            ACCUMULATE <= testACCUMULATE;
             A <= testA;
             B <= testB;
 
